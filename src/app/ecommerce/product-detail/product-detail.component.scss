@@ -1,0 +1,156 @@
+/* Component Needs */
+
+.owl-theme .owl-controls .owl-nav [class*=owl-]:hover {
+  background-color: red;
+  color: #000;
+}
+.about{
+    padding: 0px !important;
+    border: none !important;
+}
+.image-box{
+    padding: 0px !important;
+    border: none !important;
+}
+.Cart-Items
+{
+    padding: 0px !important;
+    border: none !important;
+}
+.correction{
+    padding: 0px !important;
+    border: none !important;
+}
+
+/* Component Needs */
+
+.pc-tab > input,
+.pc-tab section > div {
+  display: none;
+}
+
+.pc-tab-gr > input,
+.pc-tab-gr section > div {
+  display: none;
+}
+
+
+/* TAB Visual Styles */
+
+$activeColor: #ffffff;
+$unactiveColor: #eeeeee;
+$unactiveHoverColor: #dddddd;
+
+
+.pc-tab nav{
+  display:block;
+} 
+#tab1:checked ~ section .tab1,
+#tab2:checked ~ section .tab2,
+#tab3:checked ~ section .tab3 {
+  display: block;
+}
+
+
+#tab1:checked ~ nav .tab1,
+#tab2:checked ~ nav .tab2,
+#tab3:checked ~ nav .tab3 {
+  label {
+    background: white;
+    color: #111;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: $activeColor;
+      left: 0;
+      bottom: -1px;
+    }
+  }
+}
+/* gurantee tab Needs */
+.pc-tab-gr nav{
+  display:block;
+} 
+.pc-tab-common { 
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      label {
+        float: left;
+        padding: 15px 15px;
+        border: 1px solid #ddd;
+        border-bottom: 0;
+        background: $unactiveColor;
+        color: #444;
+        &:hover {
+          background: $unactiveHoverColor;
+        }
+        &:active {
+          background: $activeColor;
+        }
+      }
+      &:not(:last-child) label {
+         border-right-width: 0; 
+      }
+    }
+  }
+  section {
+    div {
+      padding: 20px; 
+      margin-top:5px;
+      width: 100%;
+      border: 1px solid #ddd;
+      background: #fff;
+      line-height: 1.5em;
+      letter-spacing: 0.3px;
+      color: #444;
+      h2 {
+        margin: 0;
+        letter-spacing: 1px;
+        color: #34495e;
+      }
+    }
+  }
+}
+
+#chk-gone:checked ~ section .chk-gone,
+#chk-gtwo:checked ~ section .chk-gtwo {
+  display: block;
+}
+
+
+#chk-gone:checked ~ nav .chk-gone,
+#chk-gtwo:checked ~ nav .chk-gtwo {
+  label {
+    background: white;
+    color: #111;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: $activeColor;
+      left: 0;
+      bottom: -1px;
+    }
+  }
+}
+
+
+
+
+
+
+
+

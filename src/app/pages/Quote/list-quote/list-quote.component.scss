@@ -1,0 +1,18 @@
+:host ::ng-deep ng2-smart-table .ng2-smart-actions {
+    height: auto;
+}
+
+:host ::ng-deep ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    position: right;
+}
+
+.head {
+    position: relative;
+}

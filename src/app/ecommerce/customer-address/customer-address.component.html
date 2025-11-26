@@ -1,0 +1,74 @@
+<ngx-search-text></ngx-search-text>
+
+<div class="cart-checkout-page pt-4 write-review  mobile-veiw2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto col-12 mobile-veiw2">
+                <form [formGroup]="addressForm" (ngSubmit)="onSave()">
+                    <div class="p-4 mobile-veiw2 mobile-view1">
+                        <div class="row">
+                            <div class="col-12 pt-3 ps-3 pe-3 pb-3 bg-grey1">
+                                <div class="text-center pb-3 pt-3">
+                                    <h2>ADD ADDRESS</h2>
+                                </div>
+                                <div class="row write-review-card border-0">
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="firstName" class="form-control"  placeholder="First Name">
+                                        <span *ngIf="submitted && f.firstName.errors?.required" style="display: block;" class="invalid-feedback">First Name is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="lastName" class="form-control"  placeholder="Last Name">
+                                        <span *ngIf="submitted && f.lastName.errors?.required" style="display: block;" class="invalid-feedback">Last Name is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="email" class="form-control"  placeholder="Email">
+                                        <span *ngIf="submitted && f.email.errors?.required" style="display: block;" class="invalid-feedback">Email is required</span>
+                                        <span *ngIf="submitted && f.email.errors?.pattern" style="display: block;"
+                                        class="invalid-feedback">Invalid Email ID</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="phoneNumber" class="form-control"  placeholder="Mobile No">
+                                        <span *ngIf="submitted && f.phoneNumber.errors?.required" style="display: block;" class="invalid-feedback">Mobile No is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="address1" class="form-control"  placeholder="Address Line 1">
+                                        <span *ngIf="submitted && f.address1.errors?.required" style="display: block;" class="invalid-feedback">Address Line 1 is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="address2" class="form-control"  placeholder="Address Line 2">
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <select formControlName="countryId" class="form-select">
+                                            <option value="">Select Country</option>
+                                            <option *ngFor="let country of countryList" [value]="country.id">{{country.name}}</option>
+                                        </select>
+                                        <span *ngIf="submitted && f.countryId.errors?.required" style="display: block;" class="invalid-feedback">Country is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <select formControlName="stateProvinceId" class="form-select">
+                                            <option value="">Select State</option>
+                                            <option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</option>
+                                        </select>
+                                        <span *ngIf="submitted && f.stateProvinceId.errors?.required" style="display: block;" class="invalid-feedback">State is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="city" class="form-control"  placeholder="City">
+                                        <span *ngIf="submitted && f.city.errors?.required" style="display: block;" class="invalid-feedback">City is required</span>
+                                    </div>
+                                    <div class="col-md-6 col-12 mb-3">
+                                        <input type="text" formControlName="zipPostalCode" class="form-control"  placeholder="PIN Code">
+                                        <span *ngIf="submitted && f.zipPostalCode.errors?.required" style="display: block;" class="invalid-feedback">PIN Code is required</span>
+                                    </div>
+                                    <div class="col-md-12 col-12 mb-3 text-center pt-2">
+                                        <button type="submit" class="btn-load-more mr-2">Save</button>
+                                        <button type="button" (click)="goBack()" class="btn-load-more ">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

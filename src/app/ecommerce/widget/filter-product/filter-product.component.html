@@ -1,0 +1,114 @@
+<div class="product-card1" [hidden]="panelVisible" >
+	<div class="row pt-3 pb-3">
+		<div class="col-10">
+			<div class="text-filter-title">
+				All Filter
+			</div>
+			<div class="text-filter-products text-danger">
+				{{totalCount}} Products
+			</div>
+		</div>
+		
+		<div class="col-2 desktop-hide">
+			<a [routerLink]="" (click)="hide()" style="cursor:pointer;"><img src="../../../assets/images/ecommerce/close-icon1.png" class="icon1"></a>
+		</div>
+	</div>
+	<div class="overflow-x">
+        <div class="flex-sec border-top border-bottom">
+            <div class="flex-items1">
+                <div class="text-filter-title1">
+                    <a (click)="clearfilter()" [routerLink]=""  style="text-decoration: none;color:inherit;cursor: pointer;" >CLEAR FILTER</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row pt-4 pb-3 border-top border-bottom">
+		<div class="col-12">
+			<div class="text-filter-title1">
+				CATEGORY
+			</div>
+		</div>
+		<div class="col-12 mt-4">
+            <ng-container *ngFor="let category of categories; let i = index">
+                <div class="row mt-2">
+                    <div class="col-10 ps-0">
+                        <div class="text-input1">
+                            <input type="checkbox" #catcheckbox [name]="i+'c'" [checked]="category.id == selectedFilterOption.category" (change)="getFilteredDrillOption($event,'CAT',category,i+'c')" class="checkbox1"> {{category.cat}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="txt-data1 text-center pt-2">
+                            ({{category.ProductCount}})
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+		</div>
+	</div>
+	
+	<div *ngIf="showProductType" class="row pt-4 pb-3 border-top border-bottom">
+		<div class="col-12">
+			<div class="text-filter-title1">
+				PRODUCT TYPE
+			</div>
+		</div>
+		
+		<div class="col-12 mt-4">
+            <ng-container *ngFor="let group of groups; let i = index">
+                <div class="row mt-2">
+                    <div class="col-10 ps-0">
+                        <div class="text-input1">
+                            <input type="checkbox" #groupcheckbox [name]="i+'g'" [checked]="group.GroupId == selectedFilterOption.subCategory" (change)="getFilteredDrillOption($event,'GROUP',group,i+'g')" class="checkbox1"> {{group.GroupCode}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="txt-data1 text-center pt-2">
+                            ({{group.ProductCount}})
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+		</div>
+	</div>
+    <ng-container *ngIf="showAttributes">
+        <ng-container *ngFor="let attr of attributes; let i = index">
+            <div class="row pt-4 pb-3 border-top border-bottom">
+                <div class="col-12">
+                    <div class="text-filter-title1">
+                        {{attr.attribute}}
+                    </div>
+                </div>
+                <div class="col-12 mt-4">
+                    <ng-container *ngFor="let attrOptions of attr.options">           
+                            <div class="row mt-2">
+                                <div class="col-10 ps-0">
+                                    <div class="text-input1">
+                                        <input type="checkbox" #attrcheckbox [name]="i+'a'+attrOptions.attributeOption" class="checkbox1" (change)="setSelectedAttributes($event,attrOptions,i+'a'+attrOptions.attributeOption)"> {{attrOptions.attributeOption}}
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="txt-data1 text-center pt-2">
+                                        ({{attrOptions.ProductCount}})
+                                    </div>
+                                </div>
+                            </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+	
+	<div class="pos-fixed">
+        <div class="row">
+            <div class="col-12 pt-4 pb-4">
+                <div class="text-center">
+                    <a  [routerLink]="" (click)="clearfilter()" style="text-decoration:none;cursor: pointer;background-color: #EAEAEA;color: #000;font-weight: 600;" class="read-more1 mr-2">Clear Filter</a>
+                
+                    <a  [routerLink]="" (click)="searchproduct()" style="text-decoration:none;cursor: pointer;background-color: #EAEAEA;color: #000;font-weight: 600;" class="read-more1">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ <ngx-spinner></ngx-spinner>

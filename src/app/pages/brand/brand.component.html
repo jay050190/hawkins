@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Brand</h1>
+
+    <div class="row">
+      <div class="col-md-6">
+        <nb-card>
+          <nb-card-header>Add new brand</nb-card-header>
+          <nb-card-body>
+            <form [formGroup]="brandMstForm" (ngSubmit)="onSave()">
+              <div class="form-group">
+                <label for="name" class="label">Name</label>
+                <input type="text" nbInput fullWidth formControlName="name">
+                  <span *ngIf="submitted && f.name.errors?.required" style="display: block;" class="invalid-feedback">Name is required</span>
+              </div>
+              <button type="submit" nbButton status="success">{{buttontext}}</button>
+              <button type="button" class="ml-2" nbButton status="primary" (click)="onClear()">Clear</button>
+            </form>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-md-6">
+        <nb-card style="margin-top: 10px">
+          <nb-card-header>
+            View Brand
+          </nb-card-header>
+
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-12">
+          <ng2-smart-table [settings]="cussettings" [source]="cussource" (custom)="onCustomAction($event)" (deleteConfirm)="onDeleteConfirm($event)">
+                </ng2-smart-table>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+    </div>
+  </div>

@@ -1,0 +1,43 @@
+nb-card-body {
+    overflow: visible;
+    padding-top: 0;
+
+    >* {
+        margin-top: 1rem;
+    }
+}
+
+.input-field {
+    width: 70%;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+    display: flex;
+    border-radius: 5px;
+}
+
+label {
+    margin: 10px;
+    display: inline-block;
+}
+
+.flexContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.percentage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

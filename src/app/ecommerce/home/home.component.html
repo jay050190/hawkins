@@ -1,0 +1,620 @@
+<ngx-search-text></ngx-search-text>
+<div class="mb-5 slider main-top-slider1 top-bar-banner">
+	<owl-carousel-o [options]="customOptions">
+		<!-- <ng-template carouselSlide id="0">
+			<ngx-video-player></ngx-video-player>
+		   </ng-template> -->
+		<ng-container *ngFor="let slide of slidesStore">
+			<ng-template carouselSlide [id]="slide.id" class="">
+				<img style="border-radius:0px !important;" [src]="slide.src" [alt]="slide.alt" [title]="slide.title"
+					class="img-desktop">
+				<img style="border-radius:0px !important;" [src]="slide.srcmob" [alt]="slide.alt" [title]="slide.title"
+					class="img-mobile">
+			</ng-template>
+
+		</ng-container>
+
+	</owl-carousel-o>
+</div>
+
+<div class="slide-banner2">
+	<ng-container *ngFor="let item of pressureCookerBannerData">
+		<ngx-carousal-banner [item]="item"></ngx-carousal-banner>
+	</ng-container>
+	<ng-container *ngFor="let item of cookwareBannerData">
+		<ngx-carousal-banner [item]="item"></ngx-carousal-banner>
+	</ng-container>
+	<ng-container *ngFor="let item of accessoriesBannerData">
+		<ngx-carousal-banner [item]="item"></ngx-carousal-banner>
+	</ng-container>
+	<div id="giftset">
+		<ng-container  *ngFor="let item of setsBannerData">
+			<ngx-carousal-banner [item]="item"></ngx-carousal-banner>
+		</ng-container>
+	</div>
+
+
+
+
+	<ng-container *ngFor="let item of itemNew">
+		<ngx-product-carousal [item]="item"></ngx-product-carousal>
+	</ng-container>
+
+	<ng-container *ngFor="let item of itemTop">
+		<ngx-product-carousal [item]="item"></ngx-product-carousal>
+	</ng-container>
+	
+
+</div>
+<div id="buyinbulk" class="slide-panel1 border-bottom">
+	<div class="container  two-column-section">
+		<div class="row mt-3 mb-3 mobile-label-view">
+			<div class="title-bar mb-3 mobileview-top1 mobile-label-view">
+				<h1 class="main-title">BUY IN BULK : GET QUOTE</h1>
+			</div>
+			<div class="col-md-5 col-12 p-0-column">
+				<owl-carousel-o [options]="customOptionBuyInBulk">
+					<ng-container *ngFor="let slide of homebannerproduct('BULK')">
+						<ng-template carouselSlide class="slider-item" [id]="slide.id">
+							<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+							<div class="slider-item">
+								<!-- <div class="slider-content">
+								<div class="flex-column">
+								  <h2>Hawkins- The perfect<br> wedding gift.</h2>
+								  <a href="" class="button-img" tabindex="0"><img src="../../../assets/images/ecommerce/enquiry-btn.svg"></a>
+								</div>
+							  </div> -->
+							</div>
+						</ng-template>
+					</ng-container>
+				</owl-carousel-o>
+			</div>
+			<div class="col-md-7 col-12 p-0-column">
+				<div class="row">
+					<div class="col-12 mobile-view1 pe-0">
+						<div class="content-height-box">
+							<p>Hawkins products make wonderful Gifts. Useful in every home. A wide range of over 350
+								products to choose from. The MRP range is from Rs. 220 to Rs. 7,275. Get quote for the
+								products you wish to buy in bulk.
+							</p>
+
+							<div class="desktop-mobile-hide-show">
+								<ul class="list-style-font">
+									<li>See our product range by selecting the type of product - Pressure Cooker,
+										Kadhai, Tava, etc.</li>
+									<li>Select a product or products you wish to enquire by clicking on "Get Quote".
+									</li>
+									<li>After you finish selecting product(s), go to “My Wishlist”</li>
+									<li>Click on the product(s) you want to enquire or get a quote</li>
+									<li>Click on "Get a Quote".</li>
+									<li>Fill in your details like email and mobile number. We will send you our quote.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- <a href="#" class="btn-slide float-start"><img src="../../../assets/images/ecommerce/cart.png" class="img-fluid"> &nbsp; Buy Now</a> -->
+						<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2 ms-2"><img src="../../../assets/images/ecommerce/buy-now1.png" class="img-fluid"> &nbsp; BUY NOW</a> -->
+						<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2">READ MORE <img src="../../../assets/images/ecommerce/read-more1.png" class="img-fluid"></a> -->
+						<div class="menu-mobile-panel float-end">
+							<form class="form-emp" [formGroup]="bulkForm">
+								<select formControlName="category"
+									class="form-control float-start me-2 select-control mt-1" style="width: 150px;"
+									(change)="getFilterOptionByCategory()">
+									<option value="">Category</option>
+									<option *ngFor="let category of productCategories" [value]="category.id">
+										{{category.cat}}</option>
+								</select>
+								<select formControlName="subCategory"
+									class="form-control float-start me-2 select-control mt-1" style="width: 150px;"
+									[disabled]="disableProducType">
+									<option value="">Product Type</option>
+									<option *ngFor="let group of productGroups" [value]="group.GroupId">
+										{{group.GroupCode}}</option>
+								</select>
+								<a style="cursor:pointer" (click)="redirectTo('/product-list')" [routerLink]=""
+									class="mt-1 float-start btn-slide text-center text-black width-auto ps-3 pe-3 pt-2 width-auto pe-3 pt-2">GET
+									QUOTE</a>
+							</form>
+						</div>
+
+
+						<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2 ms-2 width-auto"><img src="../../../assets/images/ecommerce/send-enquiry1.png" class="img-fluid"> &nbsp; SEND ENQUIRY</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-container *ngFor="let item of spareBannerData">
+	<ngx-carousal-banner [item]="item"></ngx-carousal-banner>
+</ng-container>
+
+<div class="slide-panel1 border-bottom">
+	<div class="container two-column-section">
+		<div class="row mt-3 mb-3">
+			<div class="title-bar mb-3 mobile-label-view">
+				<h1 class="main-title">FIND A SERVICE CENTRE</h1>
+			</div>
+			<div class="col-md-5 col-12 p-0-column">
+				<owl-carousel-o [options]="customOptionBuyInBulk">
+					<ng-container *ngFor="let slide of homebannerproduct('BULK')">
+						<ng-template carouselSlide class="slider-item" [id]="slide.id">
+							<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+							<div class="slider-item">
+								<!-- <div class="slider-content">
+								<div class="flex-column">
+								  <h2>Hawkins- The perfect<br> wedding gift.</h2>
+								  <a href="" class="button-img" tabindex="0"><img src="../../../assets/images/ecommerce/enquiry-btn.svg"></a>
+								</div>
+							  </div> -->
+							</div>
+						</ng-template>
+					</ng-container>
+				</owl-carousel-o>
+			</div>
+			<div class="col-md-7 col-12 p-0-column">
+				<div class="row">
+					<div class="col-12 mobile-view1 pe-0">
+						<div class="content-height-box">
+							<p>Hawkins offers free service throughout the life of your pressure cooker at over 700
+								service centres all across India, Nepal & Bhutan. These service centres will replace
+								without any charge parts which are under guarantee. Normal replacement parts, namely
+								safety valve, gaskets and plastic handles are not covered under the guarantee. Even
+								beyond the guarantee period for the entire life of the cooker, Hawkins authorised
+								service centres will only charge for parts replaced and not for labour. Each of these
+								service centres have been trained at the factory training centre. Only such trainees
+								that meet our standards are appointed as service centres. These service centres are
+								checked periodically by trained company personnel. Such evaluations form a basis for the
+								remuneration of the service centres by us.
+							</p>
+							<div class="desktop-mobile-hide-show">
+								<p>Some of these Authorised Dealers have also been appointed by us as Hawkins Authorised
+									Service Centres:</p>
+							</div>
+						</div>
+
+						<div class="menu-mobile-panel mobile-menu-2">
+							<a [routerLink]="['/sales-service']"
+								class="btn-slide text-center text-black width-auto pe-3 pt-2 width-auto pe-3 pt-2"><img
+									src="../../../assets/images/ecommerce/find-now1.png" class="img-fluid"> &nbsp; FIND
+								SERVICE CENTRE</a>
+						</div>
+						<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2">READ MORE <img src="../../../assets/images/ecommerce/read-more1.png" class="img-fluid"></a> -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="slide-panel1 border-bottom">
+	<div class="container two-column-section">
+		<div class="row mt-3 mb-3 mobile-label-view">
+			<div class="title-bar mb-3 mobile-label-view">
+				<h1 class="main-title">REGISTER GUARANTEE</h1>
+			</div>
+			<div class="col-md-5 ol-12 p-0-column">
+				<owl-carousel-o [options]="customOptionBuyInBulk">
+					<ng-container *ngFor="let slide of homebannerproduct('BULK')">
+						<ng-template carouselSlide class="slider-item" [id]="slide.id">
+							<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+							<div class="slider-item">
+								<!-- <div class="slider-content">
+								<div class="flex-column">
+								  <h2>Hawkins- The perfect<br> wedding gift.</h2>
+								  <a href="" class="button-img" tabindex="0"><img src="../../../assets/images/ecommerce/enquiry-btn.svg"></a>
+								</div>
+							  </div> -->
+							</div>
+						</ng-template>
+					</ng-container>
+				</owl-carousel-o>
+			</div>
+			<div class="col-md-7 col-12 p-0-column">
+				<div class="row">
+					<div class="col-12 mobile-view1 pe-0">
+						<div class="content-height-box">
+							<p>Hawkins products are guaranteed against defects in material and workmanship as per the
+								terms of the written guarantee supplied with each product. All our Pressure Cookers and
+								our Futura Hard Anodised cookware are guaranteed for a period of five years from the
+								date of first purchase by the user; our Futura Nonstick cookware comes with a two year
+								guarantee. You may choose to register your product here or as directed in the guarantee
+								card supplied along with the product.</p>
+							<div class="desktop-mobile-hide-show">
+								<p>Use of this section is governed by our <a routerLink="terms">Terms Of Use</a> and <a
+										href="#">Privacy Policy</a></p>
+								<p>Please note that this facility presently is only for customers in India.</p>
+							</div>
+
+						</div>
+					</div>
+					<div class="menu-mobile-panel">
+						<div class="btn-link1">
+							<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2">READ MORE <img src="../../../assets/images/ecommerce/read-more1.png" class="img-fluid"></a> -->
+							<a href="product-registration"
+								class="btn-slide text-center text-black width-auto pe-3 pt-2 width-auto pe-3 pt-2"><img
+									src="../../../assets/images/ecommerce/visit-now1.png" class="img-fluid"> &nbsp;
+								REGISTER</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="recipie" class="slide-panel9 border-bottom">
+	<div class="container">
+		<div class="title-bar mt-3 mobile-label-view">
+			<h1 class="main-title">RECIPES</h1>
+		</div>
+	</div>
+	<div class="container mb-3 mobile-view1">
+		<div class="mt-3">
+			<div class="row">
+				<div class="col-6 col-md-3 p-0 border">
+					<!-- <a href="https://www.hawkinscookers.com/HawkRecipeSubMenu.aspx?typ=veg&seg=Category&L=E"
+						target="_blank">
+						<img src="../../../assets/images/ecommerce/vegetarian.png" class="img-fluid" />
+					</a> -->
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'VEG'}">
+						<img src="../../../assets/images/ecommerce/vegetarian.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie1"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'VEG'}"class="link-p">Vegetarian</a></label>
+				</div>
+				<div class="col-6 col-md-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'NONVEG'}">
+						<img src="../../../assets/images/ecommerce/non-vegetarian.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie2"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'NONVEG'}" class="link-p">Non-vegetarian</a></label>
+				</div>
+				<div class="col-6 col-md-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'PRESSURECOOKER'}">
+						<img src="../../../assets/images/ecommerce/pressure-cooker.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie1"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'PRESSURECOOKER'}" class="link-p">Pressure Cooker Recipes</a></label>
+				</div>
+				<div class="col-6 col-md-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'COOKWARE'}">
+						<img src="../../../assets/images/ecommerce/cookware-recipes.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie2"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'COOKWARE'}" class="link-p">Cookware Recipes</a></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'SOUP'}">
+						<img src="../../../assets/images/ecommerce/soups.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie3"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'SOUP'}" class="link-p">Soups</a></label>
+				</div>
+				<div class="col-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'STARTER'}">
+						<img src="../../../assets/images/ecommerce/starters.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie3"><a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'STARTER'}" class="link-p">Starters</a></label>
+				</div>
+				<div class="col-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'MAINCOURSE'}">
+						<img src="../../../assets/images/ecommerce/main-course.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie3"><a  class="link-p" [routerLink]="['/list-recipie']" [queryParams]="{ category: 'MAINCOURSE'}">Main Course</a></label>
+				</div>
+				<div class="col-3 p-0 border">
+					<a [routerLink]="['/list-recipie']" [queryParams]="{ category: 'DESSERT'}">
+						<img src="../../../assets/images/ecommerce/desserts.webp" class="img-fluid" />
+					</a>
+					<label class="absoute-recipie3"><a class="link-p" [routerLink]="['/list-recipie']" [queryParams]="{ category: 'DESSERT'}">Desserts</a></label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="about" class="slide-panel1 border-bottom">
+	<div class="container desktop-view1">
+		<div class="container mt-3 mobile-view1">
+			<div class="title-bar mobile-label-view1">
+				<h1 class="main-title">ABOUT HAWKINS</h1>
+			</div>
+		</div>
+		<div class="row mt-3 bg-grey1">
+			<div class="container mobile-view1">
+				<div class="row">
+					<div class="col-12 col-md-5 mobile-view1">
+						<owl-carousel-o [options]="customOptions">
+
+							<ng-container *ngFor="let slide of homebannerproduct('ABOUT')">
+								<ng-template carouselSlide [id]="slide.id">
+									<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title"
+										style="width:100% !important; height: 315px;">
+								</ng-template>
+							</ng-container>
+
+						</owl-carousel-o>
+					</div>
+
+					<div class="col-12 col-md-7">
+						<div class="row pb-4 bg-grey1">
+							<div class="col-11 col-md-12 mx-auto text-start pt-2">
+								<div class="content-height-box">
+									<p class="about-content1">Hawkins Cookers Limited has been in business since 1959.
+										Today, it has two offices, three factories and about 700 persons working. It is
+										the leader in the pressure cooker market in India and has exported its products
+										since 1974 to various countries in each of the six continents of the world.
+										Hawkins has sold over 105 million pressure cookers and cookware worldwide.</p>
+									<div class="desktop-mobile-hide-show">
+										<p class="doted-data">Hawkins pressure cookers are listed by Underwriters
+											Laboratories, USA, an independent Worldwide institution testing products for
+											public safety. From February 1, 2021, the Government of India has made it
+											mandatory to list all Pressure Cookers manufactured and sold in India with
+											the Bureau of Indian Standards, commonly known as ISI.</p>
+										<p class="doted-data">Hence additionally, all Pressure Cookers manufactured by
+											us have certification of BIS and carry the ISI stamp mark too. Each pressure
+											cooker made by Hawkins features an inside fitting lid.</p>
+										<p class="doted-data">This design is inherently safer than conventional pressure
+											cookers.</p>
+									</div>
+
+								</div>
+								<div class="menu-mobile-panel">
+									<a [routerLink]="['/about']"
+										class="btn-slide text-center text-black width-auto pe-3 pt-2 width-auto pe-3 pt-2"><img
+											src="../../../assets/images/ecommerce/visit-now1.png" class="img-fluid">
+										&nbsp; READ MORE </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+<div id="jobs" class="border-bottom menubar1 two-column-section">
+	<div class="container">
+		<div class="">
+			<div class="row mt-3 mb-3 mobile-label-view">
+				<div class="title-bar pb-3 mobile-label-view">
+					<h1 class="main-title">CURRENT OPENINGS</h1>
+				</div>
+				<div class="col-md-5 col-12 p-0-column">
+					<owl-carousel-o [options]="customOptionBuyInBulk">
+						<ng-container *ngFor="let slide of homebannerproduct('BULK')">
+							<ng-template carouselSlide class="slider-item" [id]="slide.id">
+								<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+								<div class="slider-item">
+									<!-- <div class="slider-content">
+							<div class="flex-column">
+								<h2>Hawkins- The perfect<br> wedding gift.</h2>
+								<a href="" class="button-img" tabindex="0"><img src="../../../assets/images/ecommerce/enquiry-btn.svg"></a>
+							</div>
+							</div> -->
+								</div>
+							</ng-template>
+						</ng-container>
+					</owl-carousel-o>
+				</div>
+
+				<div class="col-md-7 col-12 p-0-column">
+					<div class="row">
+						<div class="col-12 mobile-view1 pe-0">
+							<div class="content-height-box">
+								<p>Founded in 1959, Hawkins Cookers Limited is a professionally managed, public limited
+									Company. In calendar 2022, Sales were Rs. 1024 crores, up 10%, and Profit After Tax
+									was Rs. 93 crores. Hawkins is a leader in the Pressure Cooker market in India and
+									has diversified successfully into Cookware. Hawkins has offices in Mumbai at Cuffe
+									Parade and Mahim and factories in Thane, near Mumbai, Hoshiarpur in the Punjab, and
+									Jaunpur near Prayagraj.</p>
+								<div class="desktop-mobile-hide-show">
+									<p> Hawkins is known for its policies and ethical practices. Hawkins believes in
+										selection and promotion purely on merit.</p>
+									<p class="doted-data">We welcome innovation, especially initiatives which have
+										impact. Hawkins Managers are expected to apply their minds, act and take
+										responsibility for their actions. A large part of the CTC is based upon results
+										and performance.</p>
+								</div>
+							</div>
+
+							<!-- <a href="#" class="btn-slide float-start"><img src="../../../assets/images/ecommerce/cart.png" class="img-fluid"> &nbsp; Buy Now</a> -->
+							<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2">READ MORE <img src="../../../assets/images/ecommerce/read-more1.png" class="img-fluid"></a> -->
+							<div class="menu-mobile-panel mobile-menu-3">
+								<a href="current-opening"
+									class="btn-slide text-center text-black width-auto pe-3 pt-2"><img
+										src="../../../assets/images/ecommerce/find-now1.png" class="img-fluid"> &nbsp;
+									FIND OPENINGS</a>
+							</div>
+
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="investment" class="border-bottom menubar1 two-column-section pb-3">
+	<div class="container">
+		<div class="row  mb-3 mobile-label-view">
+			<div class="title-bar mt-3 pb-3 mobile-label-view">
+				<h1 class="main-title">INVESTMENT CORNER</h1>
+			</div>
+
+			<div class="col-md-5 col-12 p-0-column">
+				<!-- <owl-carousel-o [options]="customOptionBuyInBulk">
+					<ng-container *ngFor="let slide of homebannerproduct('BULK')">
+						<ng-template carouselSlide class="slider-item" [id]="slide.id">
+							<img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+							<div class="slider-item">
+								
+							</div>
+						</ng-template>
+					</ng-container>
+				</owl-carousel-o> -->
+
+				<div class="accordion accordion-flush row" id="accordionFlushExample">
+					<div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/financial-results">
+							Financial Results
+						  </a>
+						</h2>
+						
+					  </div>
+					<div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+					  <h2 class="accordion-header">
+						<a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/shareholding-information">
+							Shareholding Information
+						</a>
+					  </h2>
+					 
+					</div>
+					<div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+					  <h2 class="accordion-header">
+						<a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/other-information">
+							Other Information
+						</a>
+					  </h2>
+					 
+					</div>
+					<div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/corporate-governance">
+							Code of Conduct of Board of Directors and Senior Management Personnel
+						  </a>
+						</h2>
+						
+					  </div>
+
+					  <div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/agm">
+							AGM
+						  </a>
+						</h2>
+						
+					  </div>
+
+					  <div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/annual-reports">
+							Annual Reports & Chairman's Speech at AGM
+						  </a>
+						</h2>
+						
+					  </div>
+
+					  <div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/vigil-mechanism">
+							Vigil Mechanism
+						  </a>
+						</h2>
+						
+					  </div>
+
+					  <div class="accordion-item col-md-6 col-12" style="border-bottom:0px !important;">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed" type="button"class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/contact-details">
+							Contact Details for Investors
+						  </a>
+						</h2>
+						
+					  </div>
+
+
+					  <div class="accordion-item col-md-6 col-12 mobile-border-bottom-0">
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="/shareholder-offer">
+							Shareholder Offer
+						  </a>
+						</h2>
+						
+					  </div>
+
+					  <div class="accordion-item col-md-6 col-12" >
+						<h2 class="accordion-header">
+						  <a class="accordion-button collapsed text-decoration-none text-dark" href="javascript:;" routerLink="#">
+							Fixed Deposit Scheme
+						  </a>
+						</h2>
+						
+					  </div>
+					 
+					 
+				  </div>
+			</div>
+
+			<div class="col-md-7 col-12 p-0-column mobile-view-top1">
+				<div class="row">
+					<div class="col-12 mobile-view1 pe-0">
+						<div class="content-height-box">
+							<p>20% Discount offer in 2022 for Hawkins Shareholders</p>
+							<p>Dear Shareholders,</p>
+							<p>You may have already received our Chairman & CEO's letter dated July 11, 2022 explaining
+								the 20% discount offer and discount coupons. Please click here to see a copy of the
+								Chairman & CEO's letter. Please click here to download the pricelist of all products, on
+								which the 20% offer is applicable.</p>
+							<div class="desktop-mobile-hide-show">
+								<p>For your benefit we list below the Redemption Centres by zone.</p>
+							</div>
+						</div>
+
+						<!-- <a href="#" class="btn-slide float-start"><img src="../../../assets/images/ecommerce/cart.png" class="img-fluid"> &nbsp; Buy Now</a> -->
+						<!-- <a href="#" class="btn-slide text-center text-black width-auto pe-3 pt-2">READ MORE <img src="../../../assets/images/ecommerce/read-more1.png" class="img-fluid"></a> -->
+						<div class="menu-mobile-panel">
+							<a routerLink="/shareholder-offer"
+								class="btn-slide text-center text-black width-auto pe-3 pt-2"><img
+									src="../../../assets/images/ecommerce/visit-now1.png" class="img-fluid"> &nbsp;
+								VISIT NOW</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="menubar1  two-column-section mt-3">
+	<div class="container">
+		<div class="row  mt-3 pb-4 mobile-label-view ARTICLE-BLOG">
+			<div class="title-bar pb-3 mobile-label-view">
+				<h1 class="main-title">HAWKINS ARTICLES</h1>
+			</div>
+			<owl-carousel-o [options]="customOptionsArticle" class="ps-0">
+				<ng-container *ngFor="let slide of homebannerproduct('ARTICLE')">
+					<ng-template carouselSlide [id]="slide.id">
+						<div class="row">
+							<div class="mobile-view-pd-2">
+								<div class="card border rounded-0">
+									<div>
+										<img height="250px" [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+									</div>
+									<div class="btn-link2 line-height1 mt-2 p-3 pb-4">
+										<p class="mb-0"><b>“Aluminium”</b></p>
+										<p class="menu-mobile-panel menu-desktop-panel pt-2">
+											<a href="#"
+												class="btn-slide text-center text-black width-auto ps-4 pe-3 pt-2"
+												style="display:flex;">READ ARTICLE</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</ng-template>
+				</ng-container>
+			</owl-carousel-o>
+		</div>
+	</div>
+</div>

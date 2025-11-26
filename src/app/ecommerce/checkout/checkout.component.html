@@ -1,0 +1,164 @@
+<div class="searcbar" id="searchbar">
+    <div class="">
+        <input type="text" placeholder="Search" class="form-control text-search">
+    </div>
+</div>
+<div class="pt-5 cart-checkout-page2">
+    <ng-container *ngIf="step1">
+        <div class="menubar1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-5">
+                        <div class="Header">
+                            <h3 class="Heading">Checkout</h3>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-3 text-end">
+                        <a [routerLink]="['/customer-address']" [queryParams]="{operation: 'I'}" class="text-decoration-none btn-success btn-sm p-2 ps-3 pe-3 text-white">Add a New Address + </a>
+                    </div>
+                    <div class="col-12 col-md-12 mt-3 p-0">
+                        <div class="row address-container">
+                            <ng-container *ngFor="let item of customerAddresses;let i = index">
+                                    <div class="col-md-6 col-12 option_item mb-4">
+                                        <input type="radio" name="options" class="checkbox">
+                                        <div class="row option_inner google">
+                                            <div class="col-md-12">
+                                                
+                                                <div class="tickmark"></div>
+                                                <div class="address-header">
+                                                    <div><span class="review-h">{{item.FirstName}} {{item.LastName}}</span></div>
+                                                </div>
+                                                <div class="mt-2"><span class="review-para">{{item.StateName}}, {{item.City}} {{item.ZipPostalCode}}</span></div>
+                                                <div>
+                                                    <span class="review-para">{{item.Address1}}, {{item.Address2}}</span>
+                                                </div>
+                                                <div>
+                                                    <span class="review-para">Phone number: {{item.PhoneNumber}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 p-0">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-4  pt-4"><a class="text-decoration-none btn-warning btn-sm p-2 ps-3 pe-3 z-index9" [owlRouterLink]="['/customer-address']" [queryParams]="{ add: item.Id,operation:'U'}" >Edit Address</a></div>
+                                                    <div class="col-12 col-md-8 pt-4 add-button">
+                                                        <a class="text-decoration-none btn-danger rounded text-white btn-sm p-2 ps-3 pe-3 z-index9" (click)="placeOrder(item)">Deliver to this address</a>
+                                                    </div>
+                                               </div>
+                                            </div>
+                                           </div>
+                                           
+                                          
+                                    </div>
+                               
+                            </ng-container>
+                        </div>
+                        </div>
+                </div>  
+                <!-- <div class="row">
+                    <div class="col-12 p-3 border-top">
+                        <a [routerLink]="['/customer-address']" class="btn-link1">Add a New Address <span class="float-end"><img src="../../../assets/images/ecommerce/arrow-r.png" class="img-fluid icon-list-1"></span></a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="step2">
+        <div class="container">    
+            <div class="row">
+                <div class="col-md-5 col-12 mb-3-3">
+                    <div class="CartContainer" *ngIf="cartItem.length">
+                        <div class="Header">
+                            <h3 class="Heading">Delivery Address</h3>
+                        </div>
+                        <div class="Cart-Items">
+                            <div class="address-card">
+                                <div class="address-header">
+                                    <div><span class="review-h">{{selectedAddress.FirstName}} {{selectedAddress.LastName}}</span></div>
+                                </div>
+                            
+                                <div><span class="review-para">{{selectedAddress.StateName}}, {{selectedAddress.City}} {{selectedAddress.ZipPostalCode}}</span></div>
+                            
+                                <div>
+                                    <span class="review-para">{{selectedAddress.Address1}}, {{selectedAddress.Address2}}, Mob: {{selectedAddress.PhoneNumber}}</span>
+                                </div>
+                            </div>
+                           </div>
+                    </div>
+                
+                 </div>
+           
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="CartContainer" *ngIf="cartItem.length">
+                        <div class="Header">
+                            <h3 class="Heading">Item Details</h3>
+                        </div>
+                    
+                        <ng-container *ngFor="let item of cartItem;let i = index">
+                        <div class="Cart-Items">
+                            <div class="image-box">
+                                <img [src]="item.img"  style="height:60px;width: 60px;" />
+                            </div>
+                            <div class="about">
+                                <h1 class="title">{{item.ProductName}}</h1>
+                                <h3 class="subtitle">₹ {{item.SalePrice}}</h3>
+                            </div>
+                        </div>
+                    </ng-container>
+                    
+                    </div>
+
+                    
+                </div>
+
+                <div class="col-md-3 col-12 mb-3">
+                    <div class="CartContainer mt-1 p-3" *ngIf="cartItem.length">
+                        <div class="order-total pt-3">
+                        <div class="value">No of items:</div>
+                        <div class="value">{{totalItem}} </div>
+                      
+                        </div>
+                        <div class="order-total border-top pt-2 mt-2">
+                            <div class="label">Order Total:</div>
+                            <div class="label">₹ {{totalAmt}} </div>
+                            </div>
+                        <div class="pt-2 pb-3">
+                            <button class="button p-2 ps-2 pe-2 btn-sm" (click)="finalorder()">Confirm And Place Order</button>
+                        </div>
+
+                        </div>
+                        
+                </div>
+            </div>   
+        </div>
+    </ng-container>
+    <div class="" *ngIf="step3">
+        <div class="row">
+        
+           <div class="col-md-6 col-12 mx-auto">
+           
+                   <div class="card border rounded">
+               <div class="card-header">
+               <h5>Successful</h5>
+               </div>
+               <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center">
+                        <img src="https://eso.clan-oberon.de/wp-content/uploads/2019/06/green-check-icon.jpg" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>Your order is placed</strong></h3>
+                        <h4>Shop More :)</h4>
+                   </div>
+                   <div class="col-md-5 mx-auto col-12">
+                    <button class="button" (click)="goToRoute('./product-list')">Continue shopping</button>
+                   </div>
+               </div>
+            </div>
+           </div>
+        
+        </div>
+       
+    </div>
+
+   
+       
+        
+     
+
+</div>

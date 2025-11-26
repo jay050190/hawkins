@@ -1,0 +1,628 @@
+<ngx-search-text></ngx-search-text>
+
+<ng-container *ngIf="!this.loaderService.getLoading()" >
+<div class="container mobile-view1">
+	
+	<div class="row">
+		<div class="col-md-6 col-12 mt-5 mt-t1-flex">
+			<!-- <div class="row desktop-hide">
+				<div class="col-12 pt-4 pb-2 border-top">
+					
+					<a [routerLink]="['/product-list']"  class="btn-link1 bg-transparent"><span class="float-end"><img src="../assets/images/arrow-r.png" class="icon3"></span></a>
+				</div>
+			</div> -->
+			<div class="mb-5 slider desktop-top0">
+				<div class="i-sec mb-3">
+					<div class="heart-flex">
+						<input type="checkbox" id="heart" checked/>
+						<label for="heart">
+						   
+						</label>
+					</div>
+					
+					<div  class="i-sec-item">
+						<div class="dropdown">
+							<div class="" data-bs-toggle="dropdown" aria-expanded="false" >
+								<div class="bg-share">
+									<i class="fa fa-share"></i>
+								</div>
+							</div>
+							<ul class="dropdown-menu dropdown-menu-end p-0">
+							  <li><a class="dropdown-item drop-i" href="#"><i class="far fa-envelope share-list-i"></i><span class="email-label">Email</span></a></li>
+							  <li><a class="dropdown-item drop-i" href="#"><i class="fab fa-whatsapp share-list-i"></i><span class="email-label">Whatsapp</span></a></li>
+							  <li><a class="dropdown-item drop-i" href="#"><i class="fab fa-facebook-f share-list-i"></i><span class="email-label">Facebook</span></a></li>
+							  <li><a class="dropdown-item drop-i" href="#"><i class="fa fa-link share-list-i"></i><span class="email-label">Copy Link</span></a></li>
+							</ul>
+						  </div>
+					</div>
+				</div>	
+
+				<owl-carousel-o [options]="customOptions" #owlProduct>
+					<ng-container *ngFor="let slide of slidesStore">
+					  <ng-template carouselSlide [id]="slide.id">
+						<img style="border-radius:0px !important;"  [src]="slide.img" [alt]="slide.alt" [title]="slide.title">
+					  </ng-template>
+					</ng-container>    
+				  </owl-carousel-o>	
+
+				  
+					 
+			</div>	
+			<div class="mb-2" *ngIf="slidesStore.length>1">
+			<owl-carousel-o [options]="customOptionsThumbnail" #owlThumbnail>
+				<ng-container *ngFor="let slide of slidesStore">
+				  <ng-template carouselSlide [id]="slide.id">
+					<img style="border-radius:0px !important;cursor: pointer;border: 1px solid #000 !important;" (click)="handler(owlProduct,owlThumbnail,slide.id)" [src]="slide.img" [alt]="slide.alt" [title]="slide.title">
+				  </ng-template>
+				</ng-container>    
+			  </owl-carousel-o>
+			</div>
+			<!-- <div class="accordion mt-5" id="accordionExample">
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="headingOne">
+					<button class="accordion-button ac-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						GUARANTEE TERMS(1)
+					</button>
+				  </h2>
+				  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+					  This is the first item's accordion body.
+					</div>
+				  </div>
+				</div>
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="headingTwo">
+					<button class="accordion-button ac-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						GUARANTEE TERMS(2)
+					</button>
+				  </h2>
+				  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						This is the first item's accordion body.
+					  </div>
+				  </div>
+				</div>
+				
+			  </div> -->
+		</div>
+		<div class="col-md-6 col-12  mobile-view1">
+			<div>
+				<div class="pricing pt-3 pb-3">
+					<div class="row">
+						<div class="col-12 p-3">
+							<div class="text-center">
+								<span style="color: #e41d36;" class="hawkins-txt">{{ProductInfo.brandName}}</span><br/>
+								<h2>{{ProductInfo.name}}</h2>
+								<!-- <p class="text-italic">The largest-selling and the most popular model from Hawkins.</p> -->
+								<p class="pricing-list">MRP&nbsp;&nbsp;<span *ngIf="ProductInfo.mrp>ProductInfo.salePrice" class="strikethrough">₹{{ProductInfo.mrp}}</span>&nbsp;&nbsp; <span class="origin-price">{{ProductInfo.salePrice}}</span></p>
+								<div>
+									<a [routerLink]="" (click)="addProduct(ProductInfo.id)" class="btn-slide-banner ps-4 pe-4 pt-2 pb-2"><b>BUY NOW</b></a>
+									<a [routerLink]="" (click)="addProductToQuote(ProductInfo)"  class="btn-slide-banner ms-2 ps-4 pe-4 pt-2 pb-2"><b>GET QUOTE</b></a>
+								</div>				
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="heat-source pt-3 pb-3">
+				<div class="">
+				<div class="row">
+					<div class="col-12 col-md-12">
+						<div class="text-center">
+							<h2>HEAT SOURCE</h2>
+						</div>
+					</div>
+					<div class="">
+						<div class="heat-item">
+							<div class="heat-item-list">
+								<div class="card heat-card">
+									<img src="../../../assets/images/ecommerce/gas.png" class="img-fluid" alt="...">
+									<p class="heat-card-text">GAS</p>
+								</div>
+							</div>
+							<div class="heat-item-list">
+								<div class="card heat-card">
+									<img src="../../../assets/images/ecommerce/electric1.png" class="img-fluid" alt="...">
+									<p class="heat-card-text">ELECTRIC</p>
+								</div>
+							</div>
+							<div class="heat-item-list">
+								<div class="card heat-card">
+									<img src="../../../assets/images/ecommerce/ceramic.png" class="img-fluid" alt="...">
+									<p class="heat-card-text">CERAMIC</p>
+								</div>
+							</div>
+							<div class="heat-item-list">
+								<div class="card heat-card">
+									<img src="../../../assets/images/ecommerce/halogen.png" class="img-fluid" alt="...">
+									<p class="heat-card-text">HALOGEN</p>
+								</div>
+							</div>
+							<div class="heat-item-list">
+								<div class="card heat-card">
+									<img src="../../../assets/images/ecommerce/halogen.png" class="img-fluid" alt="...">
+									<p class="heat-card-text">5th HEAT</p>
+								</div>
+							</div>
+						</div>
+					</div>		
+				</div>
+			</div>
+			</div>
+			<div class="pt-3">
+				<div>
+					<div class="pe-3 ps-3 pe-3 border-bottom">
+						<h3 class="h5">
+							<strong>KEY FEATURES</strong>
+						</h3>
+					</div>
+					<div class="mt-2">
+						<ul class="list-item" >
+							<li *ngFor="let item of ProductInfo.featureJson | slice:0:6; let i = index" [attr.data-index]="i">
+								{{item}}
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div class="p-3 ps-3 pe-3">
+						<h3 class="h5">
+							<strong>ALL DETAILS</strong>
+						</h3>
+					</div>
+					<div class="main-top-tab1">
+						<div class="row mt-2">
+							<div class="pc-tab pc-tab-common">
+								<input [checked]="true" id="tab1" type="radio" name="pct" />
+								<input id="tab2" type="radio" name="pct" />
+								<input id="tab3" type="radio" name="pct" />
+								  <nav>
+									<ul>
+										<li class="tab1">
+										  <label for="tab1">Description</label>
+										</li>
+										<li class="tab2">
+										  <label for="tab2">Specification</label>
+										</li>
+										<li class="tab3">
+										  <label for="tab3">Care Istructions</label>
+										</li>
+									  </ul>
+								  </nav>
+								  <section>
+									<div class="tab1">
+									  
+									  <p>{{ProductInfo.fullDescription}}</p>
+									</div>
+									<div class="tab2">
+										<ul class="list-item" >
+											<li *ngFor="let item of ProductInfo.specification; let i = index" [attr.data-index]="i">
+												{{item.attribute}} : {{item.attributeoption}}
+											</li>
+											<li> Weight : {{ProductInfo.weightInKg}} Kg</li>
+											<li> L x W x H : {{ProductInfo.lengthInCm}} cm x {{ProductInfo.widthInCm}} cm x {{ProductInfo.heightInCm}} cm</li>
+										</ul>
+									</div>
+									<div class="tab3">
+										<p>{{ProductInfo.careInstruction}}</p>
+									</div>
+								  </section>
+							</div>
+						</div>			
+					</div>
+				</div>
+				<div *ngIf="slidesGurantee.bannerItem.length>0" class="term-garntee">
+					<div class="p-3 ps-3 pe-3">
+						<h3 class="h5">
+							<strong>WHAT'S IN THE BOX?</strong>
+						</h3>
+					</div>
+					<!--[redZoom]="slide.src" redZoomClass="red-zoom--style--window" -->
+					<div class="">
+							<ngx-static-banner [item]="slidesGurantee"></ngx-static-banner>
+							
+
+						<!-- <owl-carousel-o [options]="customGurantee">
+							<ng-container *ngFor="let slide of slidesGurantee">
+							  <ng-template carouselSlide [id]="slide.id">
+								<img  style="border-radius:0px !important;width:200px;height: 200px;" [src]="slide.src" 
+
+								[alt]="slide.alt" [title]="slide.title">
+							  </ng-template>
+							</ng-container>    
+						  </owl-carousel-o> -->
+					</div>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-12 pt-3 pb-3 ps-3 pe-3">
+						<div class="border-top bg-light ps-2 pe-4 pb-4 pt-4 download-detail-section">
+							<div class="row">
+								<div class="col-md-7 col-7">
+									<h3 class="h6 text-center pt-3">INSTRUCTION MANUAL</h3> 
+									<div class="pt-3 text-center">
+										<a href="#" class="btn-link1">
+											<span class="">
+												<a href="#" class="btn-slide-banner"><i class="fa fa-download" aria-hidden="true"></i> DOWNLOAD</a>
+											</span>
+										</a>
+									</div>
+								</div>
+
+								<div class="col-md-5 col-5 border p-2 mb-0 bg-transparent">
+									<a href="#"><img src="../../../assets/images/ecommerce/cookboook.jpg" alt="banner2" title="banner2" class="ng-star-inserted img-fluid rounded" ></a>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<div class="p-3 ps-3 pe-3">
+						<h3 class="h5">
+							<strong>GUARANTEE TERMS</strong>
+						</h3>
+					</div>
+					<div class="ps-3 pe-3">
+						<div class="pc-tab-gr pc-tab-common">
+							<input id="chk-gone" checked="true" type="radio" name="gr" />
+							<input id="chk-gtwo" type="radio" name="gr" />
+							  <nav>
+								<ul>
+								  <li class="chk-gone">
+									<label for="chk-gone">Covered in gurantee</label>
+								  </li>
+								  <li class="chk-gtwo">
+									<label for="chk-gtwo">Not covered in gurantee</label>
+								  </li>
+								</ul>
+							</nav>
+							  <section>
+								<div class="chk-gone">
+									<div class="col-md-12 col-12 p-0 correction">
+										<div class="Cart-Items  p-3">
+											<div class="image-box">
+												<img *ngIf="ProductInfo.brandName == 'Futura'"  src="../../../assets/images/ecommerce/futura-logo.png" style="height:50px" />
+												<img *ngIf="ProductInfo.brandName != 'Futura'"  src="../../../assets/images/ecommerce/hawkins-logo.png" style="height:50px" />
+											</div>
+											<div class="about pt-2">
+												<h1 class="title">{{ProductInfo.guranteeYear}} Years Manufacturer Guarantee. {{ProductInfo.coveredInGurantee}}}</h1>
+											</div>
+									   </div>
+									</div>
+								</div>
+								<div class="chk-gtwo">
+									<p>{{ProductInfo.notCoveredInGurantee}}</p>
+								</div>					
+							  </section>
+							</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="menubar1">
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-12 col-md-12 pt-2 pb-2 pe-0 ps-0">
+						<div *ngIf="itemVariation.length>0" class="border-top">
+							<h3 class="h5 pt-3">
+								<strong>OTHER SIZES OF THE SAME PRODUCT({{itemVariationCount}})</strong>
+							</h3>
+							<div class="borde-top">
+							  <div class="">
+								<ng-container *ngFor="let item of itemVariation">
+									<ngx-product-carousal [noofItems]="4" [item]="item"></ngx-product-carousal>
+								</ng-container>
+							  </div>
+							</div>
+						</div>
+	
+						<div  *ngIf="itemSameSize.length>0" class="border-top">
+							<h3 class="h5 pt-3">
+								<strong>
+									OTHER PRODUCTS IN SAME SIZE ({{itemSizeCount}})
+								</strong>
+							  </h3>
+							<div class="">
+							  <div>
+								<ng-container *ngFor="let item of itemSameSize">
+									<ngx-product-carousal [noofItems]="4" [item]="item"></ngx-product-carousal >
+								</ng-container>
+							  </div>
+							</div>
+						</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	
+	
+<div class="review border-top pt-4 pb-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-12">
+				<div class="row d-flex align-items-center justify-content-center">
+					<div class="col-md-3 text-center col-12 pe-0 p-0 mt-4">
+						<div class="row">
+							<div class="text-black">4.7	</div>
+							<div>
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star-o text-danger"></i></span>
+							</div>
+							<div>
+								4.7.00 out of 4.7 Based on 4.7.00 Reviews (3)
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-12 p-0 text-center border-start border-end mt-4">
+						<h3 class="pb-3 h5 text-center">
+							CUSTOMER REVIEWS
+						</h3>
+
+						<div class="review-list ms-3">
+							<div class="review-item">
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+							</div>
+							<div class="review-item">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							<div class="review-item">
+								<span>10</span>
+							</div>
+						</div>
+						<div class="review-list ms-3">
+							<div class="review-item">
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star-o"></i></span>
+							</div>
+							<div class="review-item">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							<div class="review-item">
+								<span>12</span>
+							</div>
+						</div>
+						<div class="review-list ms-3">
+							<div class="review-item">
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i></span>
+							</div>
+							<div class="review-item">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							<div class="review-item">
+								<span>15</span>
+							</div>
+						</div>
+						<div class="review-list ms-3">
+							<div class="review-item">
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i></span>
+							</div>
+							<div class="review-item">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							<div class="review-item">
+								<span>05</span>
+							</div>
+						</div>
+						<div class="review-list ms-3">
+							<div class="review-item">
+								<span><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i>&nbsp;<i class="fa fa-star-o"></i></span>
+							</div>
+							<div class="review-item">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							<div class="review-item">
+								<span>02</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 text-center col-12 pe-0 p-0 mt-4">
+						<div class="row">
+							<div class="mt-3">
+								<button type="button" class="btn btn-light btn-light1 btn-sm col-md-12 rounded" data-bs-toggle="modal" data-bs-target="#write-review-modal">Write a review</button>
+							</div>
+							<div class="mt-3">
+								<button type="button" class="btn btn-light btn-light1 btn-sm col-md-12 rounded" data-bs-toggle="modal" data-bs-target="#ask-question-modal">Ask a question</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12 col-12 mobile-veiw-top25 mt-4">
+				<div class="menubar1">
+					<div class="row">
+							<div class="col-12 col-md-4">
+								<div class="text-start card p-3 border">
+									<div><span class="review-h"><i class="fas fa-user-circle" style="font-size:24px"></i> Mrs. Sarita Handa</span></div>
+									<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+									<div>
+										<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+									</div>
+									<div>
+										<span class="review-para">Hawking Pressure has handles that don’t loosen and stays firm for years.</span>
+									</div>
+								</div>
+								
+							</div>
+						
+					   <div class="col-12 col-md-4">
+							<div class="text-start card p-3 border">
+								<div><span class="review-h"><i class="fas fa-user-circle" style="font-size:24px"></i> Mrs. Sarita Handa</span></div>
+								<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+								<div>
+									<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+								</div>
+								<div>
+									<span class="review-para">Hawking Pressure has handles that don’t loosen and stays firm for years.</span>
+								</div>
+							</div>
+								
+							</div>
+							<div class="col-12 col-md-4">
+								<div class="text-start card p-3 border">
+								<div><span class="review-h"><i class="fas fa-user-circle" style="font-size:24px"></i> Mrs. Shufia Shamim</span></div>
+								<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+								<div>
+									<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+								</div>
+								<div>
+									<span class="review-para">Futura Tava has handles that don’t loosen and stays firm for years.</span>
+								</div>
+						  </div>
+					 </div>
+					</div>
+					 <div id="dots3"></div> <div class="row mt-3" id="more3" style="display:none;">
+
+						<div class="col-12 col-md-4 mt-3">
+							<div class="text-start card p-3 border">
+								<div><i class="fas fa-user-circle" style="font-size:24px"></i> <span class="review-h">Mrs. Sarita Handa</span></div>
+								<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+								<div>
+									<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+								</div>
+								<div>
+									<span class="review-para">Hawking Pressure has handles that don’t loosen and stays firm for years.</span>
+								</div>
+							</div>
+							
+						</div>
+					
+				   <div class="col-12 col-md-4 mt-3">
+						<div class="text-start card p-3 border">
+							<div><span class="review-h"><i class="fas fa-user-circle" style="font-size:24px"></i> Mrs. Sarita Handa</span></div>
+							<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+							<div>
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+							</div>
+							<div>
+								<span class="review-para">Hawking Pressure has handles that don’t loosen and stays firm for years.</span>
+							</div>
+						</div>
+							
+						</div>
+						<div class="col-12 col-md-4 mt-3">
+							<div class="text-start card p-3 border">
+							<div><span class="review-h"><i class="fas fa-user-circle" style="font-size:24px"></i> Mrs. Shufia Shamim</span></div>
+							<div><span class="review-para">Mumbai, Updated 01/11/2022</span></div>
+							<div>
+								<span><i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star text-danger"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+							</div>
+							<div>
+								<span class="review-para">Futura Tava has handles that don’t loosen and stays firm for years.</span>
+							</div>
+					  </div>
+				 </div>
+
+					</div>
+					<div class="row">	
+						<div class="col-12">
+							<div class="text-center p-3">
+								<a class="btn-slide-banner" onclick="myFunction3()" id="myBtn3"><b>LOAD MORE</b></a>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="write-review-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-customer1">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title"></h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="write-review" id="customer-review">
+				<div class="row">
+					<div class="col-12 col-md-12">
+						<div class="text-center pb-3">
+							<h2>WRITE A REVIEWS</h2>
+						</div>
+						<div class="write-review-card">
+							<div class="mb-3">
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Type Your Name">
+							</div>
+							<div class="mb-3">
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="City">
+							</div>
+							<div class="mb-3">
+								<textarea class="form-control" placeholder="Type your message here…" style="height: 100px"></textarea>
+								<span class="form-validation">*The picture should be not more then 1 mb</span>
+							</div>
+							<div class="text-end pb-2 pt-2">
+								<button class="btn btn-danger">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+		</div>
+	
+	  </div>
+	</div>
+  </div>
+
+
+  <div class="modal fade" id="ask-question-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-customer1">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title"></h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="write-review" id="customer-review">
+				<div class="row">
+					<div class="col-12 col-md-12">
+						<div class="text-center pb-3">
+							<h2>Ask a Question</h2>
+						</div>
+						<div class="write-review-card">
+							<div class="mb-3">
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+							</div>
+							<div class="mb-3">
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Email ID">
+							</div>
+							<div class="mb-3">
+								<textarea class="form-control" placeholder="Question" style="height: 100px"></textarea>
+								<span class="form-validation">*The picture should be not more then 1 mb</span>
+							</div>
+							<div class="text-end pb-2 pt-2">
+								<button class="btn btn-warning">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+		</div>
+	
+	  </div>
+	</div>
+  </div>
+
+</ng-container>
+	<ngx-spinner></ngx-spinner>
+
+
+

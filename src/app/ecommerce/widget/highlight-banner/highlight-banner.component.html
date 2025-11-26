@@ -1,0 +1,20 @@
+<div class="slide-panel1" [ngClass]="item.bgcolor">
+	<div class="container">
+		<div class="title-bar" *ngIf="item.title">
+			<h1 class="main-title">{{item.title}}</h1>
+			<a [routerLink]="['/product-list']" [queryParams]="{catType:item.cattype}">View All</a>
+		</div>
+		<div class="mt-2 mb-3 p-1">
+			<owl-carousel-o [options]="customOptionsInner">
+				<ng-container *ngFor="let slide of bannerItem">
+					<ng-template carouselSlide [id]="slide.id">
+						<a (click)="redirectTo('/product-detail',slide.id)" >
+						<img [src]="slide.img" [alt]="slide.name" [title]="slide.name">
+						<div class="text-center font-bold">{{slide.name}}</div>
+					</a>
+					</ng-template>
+				</ng-container>
+			</owl-carousel-o>
+		</div>
+	</div>
+</div>

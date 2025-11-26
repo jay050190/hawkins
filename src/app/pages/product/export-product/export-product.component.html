@@ -1,0 +1,25 @@
+<form [formGroup]="prdMstForm" (ngSubmit)="onSave()">
+<nb-card>
+  <nb-card-header>
+    Export Product
+    <button type="button" (click)="downloadTemplate()" nbButton status="success" size="small" style="float:right">Download Template</button>
+  </nb-card-header>
+</nb-card>
+<div class="row">
+
+  <div class="col-md-12">
+    <nb-card >
+    <nb-card-body>
+    <div class="uploadcontainer" appDnd >
+
+        <input type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target.files)" />
+        <img src="assets/img/dnd/ic-upload-file.svg" alt="">
+        <h3>Upload product template file here</h3>
+
+        <label for="fileDropRef">Browse for file</label>
+    </div>
+    </nb-card-body>
+    </nb-card>
+</div>
+</div>
+</form>

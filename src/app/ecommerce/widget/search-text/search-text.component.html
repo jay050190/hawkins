@@ -1,0 +1,25 @@
+<div class="searcbar" id="searchbar">
+    <ng-autocomplete 
+    [data]="data"
+    [searchKeyword]="keyword"
+    placeholder="SEARCH HERE.."
+    (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)'
+    (inputFocused)='onFocused($event)'
+    [itemTemplate]="itemTemplate"
+    [isLoading]="spinner"
+    [minQueryLength]="3"
+    [historyListMaxNumber]="maxnumber"
+    >                                 
+  </ng-autocomplete>
+  
+  <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+      </ng-template>
+      
+      <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+      </ng-template>
+        <!-- <input type="text" placeholder="Search here.." (keyup.enter)="searchProduct(searchvalue.value)" #searchvalue class="form-control text-search">
+		  <button (click)="searchProduct(searchvalue.value)" class="btn-go">GO</button> -->
+</div>

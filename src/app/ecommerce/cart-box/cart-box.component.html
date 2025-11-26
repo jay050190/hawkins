@@ -1,0 +1,70 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="z-index: 999999 !important;  transition: transform .0s ease-in-out ! important;">
+    <div class="modal-header bg-warning rounded-0">
+      <h5 class="modal-title text-white">Add to cart</h5>
+      <button type="button" #closeModal class="close text-white" data-bs-dismiss="offcanvas" aria-label="Close" style="opacity: 1 !important;">
+      <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body offcanvas-body pt-2">
+      <div>
+        <ng-container *ngFor="let item of cartItem;let i = index">
+        <div class="row mt-3 pb-3 border-bottom mb-3">
+          <div class="col-md-4 col-4 image-box mt-3">
+            <img [src]="item.img"  class="img-fluid" />
+            <!-- <div class="counter">
+              <div class="btn" (click)="updateQuantity(i,'add',item)">+</div>
+              <div class="count">{{item.Quantity}}</div>
+              <div class="btn" (click)="updateQuantity(i,'remove',item)">-</div>
+          </div> -->
+          
+        </div>
+        <div class="col-md-8 col-8 about">
+            <div>
+                <h1 class="title">{{item.ProductName}}
+                  </h1>
+                <h3 class="subtitle">₹ {{item.SalePrice}}</h3>
+            </div>
+            <div  class="cart-info quantity mt-4">
+              <div class="btn-increment-decrement" (click)="updateQuantity(i,'remove',item)">-</div>
+              <input class="input-quantity" [value]="item.Quantity">
+              <div class="btn-increment-decrement" (click)="updateQuantity(i,'add',item)">+</div>
+            </div>
+
+           
+            <!-- <img src="images/veg.png" style="height:30px"/> -->
+        </div>
+          
+      </div>
+    </ng-container>
+      <!-- <div>
+        <div>
+          <label for="CartSpecialInstructions" class="ajaxcart__note">Add note for Gift Wrap</label>
+        </div>
+        <div>
+          <textarea name="note" class="form-control" rows="5" id="CartSpecialInstructions"></textarea>
+        </div>
+      </div> -->
+    </div>
+      
+    </div>
+
+    <div class="justify-content-md-center modal-footer d-block bg-danger1">
+     <div class="row">
+      <div class="col-md-6 col-6">
+        <div class="text-white"><strong>SUBTOTAL</strong></div>
+    </div>
+    <div class="col-md-6 col-6">
+      <div class="text-white"><strong>₹ {{totalAmt}}</strong></div>
+    </div>
+     </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="text-white">Shipping, taxes, and discounts calculated at checkout.</div>
+        </div>
+
+        <div class="col-md-12 text-center mt-3 pb-4">
+            <button class="border-0 btn-slide float-none text-center text-black width-auto ps-4 pe-4 pt-2 pb-2" (click)="goToRoute('/checkout')">CHECKOUT</button>
+        </div>
+      </div>
+    </div>
+</div>

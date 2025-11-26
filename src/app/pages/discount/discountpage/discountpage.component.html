@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card>
+                <nb-card-header>
+                    Product Discount
+                </nb-card-header>
+                <nb-card-body>
+                    <form id="myForm" class="p-3 rounded-3" [formGroup]="DiscountForm" (ngSubmit)="onSave()">
+                        <div class="row">
+                            <div class="col-md-6  mb-4 form-group">
+                                <label for="name" class="label">Name</label>
+                                <input type="text" id="name" nbInput fullWidth formControlName="name">
+                                <span *ngIf="submitted && f.name.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Name is required</span>
+                            </div>
+                            <div class="col-md-6  mb-4 form-group">
+                                <label for="couponCode" class="label">Coupon code</label><br>
+                                <div class="flexContainer">
+                                    <input class="input-field" type="text" id="couponCode" formControlName="couponCode"
+                                        nbInput value={{couponCodeValue}} readonly>
+                                    <button class="btn btn-primary" type="button" status=""
+                                        (click)="generateDiscountCouponCode()">Generate</button>
+                                </div>
+                                <span *ngIf="submitted && f.couponCode.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Coupon is required</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3 form-group">
+                                <nb-select placeholder="Discount Type" formControlName="discountTypeId"
+                                    (change)="saveData($event)" fullWidth>
+                                    <nb-option nbInput *ngFor="let discountType of discountTypes"
+                                        [value]="discountType.id">{{discountType.name}}</nb-option>
+                                </nb-select>
+                                <span *ngIf="submitted && f.discountTypeId.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Discount Type is required</span>
+                            </div>
+                            <div class="col-md-6 mb-3 form-group percentage">
+                                <nb-checkbox (click)="toggleCheckbox()" id="myCheckbox" status="basic"
+                                    formControlName=usePercentage>Use Percentage</nb-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="discountPercentage" class="label">
+                                    <span *ngIf="!isChecked">Discount value</span>
+                                    <span *ngIf="isChecked">Discount value %</span>
+                                </label>
+                                <input type="number" id="discountPercentage" nbInput fullWidth
+                                    formControlName="discountPercentage">
+                                <span *ngIf="submitted && f.discountPercentage.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Discount value or Percentage is required</span>
+                            </div>
+                            <div class="col-md-6 mb-3 form-group">
+                                <label for="maximumDiscountAmount" class="label">Maximum Discount Amount</label>
+                                <input type="number" id="maximumDiscountAmount" nbInput fullWidth
+                                    formControlName="maximumDiscountAmount" *ngIf="isChecked">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3 form-group">
+                                <label class="label" for="startDate">Start Date: </label>
+                                <input type="date" nbInput fullWidth id="startDate" formControlName="startDateUtc"
+                                    min="{{minDate}}">
+                                <span *ngIf="submitted && f.startDateUtc.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Start Date is required</span>
+                            </div>
+                            <div class="col-md-6 mb-3 form-group">
+                                <label class="label" for="EndDate">End Date: </label>
+                                <input type="date" nbInput fullWidth id="EndDate" formControlName="endDateUtc">
+                                <span *ngIf="submitted && f.endDateUtc.errors?.required" style="display: block;"
+                                    class="invalid-feedback">End Date is required</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3 form-group">
+                                <label class="label" for="adminComment">Comment/Remarks</label>
+                                <input type="text" rows="5" id="adminComment" nbInput fullWidth
+                                    formControlName="adminComment">
+                                <span *ngIf="submitted && f.adminComment.errors?.required" style="display: block;"
+                                    class="invalid-feedback">Admin Comment is required</span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12 form-group button-container">
+                                <button class="btn" type="submit" nbButton status="success">{{buttontext}}</button>
+                                <button class="btn" type="button" nbButton status="primary"
+                                    (click)="onClear('/pages/discount/discountpage')">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+</div>

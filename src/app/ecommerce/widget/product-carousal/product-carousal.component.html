@@ -1,0 +1,41 @@
+<div class="slide-panel1" [ngClass]="item.bgcolor">
+	<div class="container">
+		<div class="title-bar" *ngIf="item.title">
+			<h1 class="main-title">{{item.title}}</h1>
+			<a [routerLink]="['/product-list']" [queryParams]="{catType:item.cattype}">View All</a>
+		</div>
+		<div class="mt-2 mb-3 p-1">
+			<owl-carousel-o [options]="customOptionsInner">
+				<ng-container *ngFor="let slide of bannerItem">
+					<ng-template carouselSlide [id]="slide.id">
+						<a (click)="redirectTo('/product-detail',slide.id)" >
+						<img [src]="slide.img" [alt]="slide.name" [title]="slide.name">
+						</a>
+						<div class="p-3 height-product pb-4 bg-grey1">
+							<div style="cursor: pointer;" [routerLink]="['/product-detail']" [queryParams]="{ product: slide.id}"  class="p-text1">
+								{{slide.name}}
+							</div>
+							<div class="row mt-2">
+								
+								<div class="col-md-6 col-6 text-danger ps-0 pe-0">
+									<span *ngIf="slide.MRP>slide.SalePrice" class="saleprice">₹ {{slide.MRP}}</span>
+								</div>
+								<div class="col-md-6 col-6 text-danger pe-0">
+									<strong>₹ {{slide.SalePrice}}</strong>
+								</div>
+								<div class="col-md-12 col-12 text-center"><a [routerLink]=""  (click)="addProductToQuote(slide)" class="text-black text-decoration-none p-text1" style="border-bottom: 1px solid;">Get Quote</a></div>
+							</div>
+							<div class="mt-2 small">
+								<div class="row">
+									<div class="col-md-12 col-12 pe-0 ps-0 mt-1">
+										<a [routerLink]="" (click)="addProduct(item.id)" class="btn-cart1 percenterfloat"><img src="../../../assets/images/ecommerce/cart-list-icon1.png" class="img-fluid" style="width:25px !important;display: initial"> Add to Cart</a>
+									</div>					
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</ng-container>
+			</owl-carousel-o>
+		</div>
+	</div>
+</div>

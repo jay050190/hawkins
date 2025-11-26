@@ -1,0 +1,389 @@
+<form [formGroup]="prdMstForm" (ngSubmit)="onSave()">
+  <nb-card>
+    <nb-card-header>
+      Add Product
+      <button type="submit" nbButton status="success" size="small" style="float:right">Save</button>
+    </nb-card-header>
+  </nb-card>
+  <div class="row">
+    <div class="col-md-8">
+
+      <nb-card>
+        <nb-card-body>
+          <div class="form-group">
+            <label for="productName" class="label">Product Name</label>
+            <input type="text" nbInput fullWidth formControlName="name">
+            <span *ngIf="submitted && f.name.errors?.required" style="display: block;" class="invalid-feedback">Name is
+              required</span>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="label">Description</label>
+            <!-- <ngx-tiny-mce></ngx-tiny-mce> -->
+            <textarea rows="5" formControlNAme="fullDescription" nbInput fullWidth shape="round"
+              placeholder="Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productName" class="label">Guarantee (Months)</label>
+            <input type="text" nbInput fullWidth formControlName="guranteeMonth" placeholder="In months">
+          </div>
+          <div class="form-group">
+            <label for="productName" class="label">Box Contents</label>
+            <input type="text" nbInput fullWidth formControlName="boxContentsDesc" placeholder="In months">
+          </div>
+          <div class="form-group">
+            <label for="productName" class="label">Care Instructions</label>
+            <input type="text" nbInput fullWidth formControlName="careInstruction" placeholder="In months">
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <!-- formArrayName = "featureJson" -->
+      <nb-card class="inline-form-card">
+        <nb-card-header>Add Key Features</nb-card-header>
+        <nb-card-body>
+          <div class="form-inline">
+            <input type="text" formControlName="featureSingle" nbInput fullWidth placeholder="Add Feature Description">
+            <button type="button" ghost nbButton status="primary" (click)="addFeature()"><nb-icon
+                icon="plus-outline"></nb-icon></button>
+          </div>
+          <!-- *ngFor="let item of featureJson.controls.numbers.controls; let i = index"  -->
+          <ng-container formArrayName="featureJsonForm">
+            <ng-container *ngFor="let featureForm of featureJson.controls; let i = index">
+
+              <div class="form-inline" [formGroupName]="i">
+                <input type="text" formControlName="featureValue" nbInput fullWidth>
+                <button type="button" ghost nbButton status="danger" (click)="deleteFeature(i)"><nb-icon
+                    icon="trash-outline"></nb-icon></button>
+              </div>
+            </ng-container>
+          </ng-container>
+        </nb-card-body>
+      </nb-card>
+      <nb-card style="margin-top: 10px">
+        <nb-card-header>
+          Additonal Attributes
+        </nb-card-header>
+
+        <nb-card-body>
+          <div class="row">
+
+            <div class="col-sm-12">
+              <div class="form-inline">
+                <nb-select #attributeId selected="" formControlName="attributeIdSingle" fullWidth
+                  (selectedChange)="fillAttributeValueByAttributeId(attributeId.selected)">
+                  <nb-option value="">Select Attibute</nb-option>
+                  <nb-option *ngFor="let item of attributeList" [value]="item.id">{{item.name}}</nb-option>
+                </nb-select>
+                <nb-select selected="" formControlName="attributeValueIdSingle" fullWidth>
+                  <nb-option selected value="">Select Attibute Value</nb-option>
+                  <nb-option *ngFor="let item of attributeValueFormList"
+                    [value]="item.Id">{{item.ControlValue}}</nb-option>
+                </nb-select>
+                <button type="button" ghost nbButton status="primary" (click)="addAttribute()"><nb-icon
+                    icon="plus-outline"></nb-icon></button>
+              </div>
+              <ng-container formArrayName="attributeForm">
+                <ng-container *ngFor="let attribute of attributeForm.controls; let i = index">
+
+                  <div class="form-inline" [formGroupName]="i">
+
+                    <nb-select formControlName="attributeId" fullWidth>
+                      <nb-option value="">Select Attibute Value</nb-option>
+                      <nb-option *ngFor="let item of attributeList" [value]="item.id">{{item.name}}</nb-option>
+                    </nb-select>
+                    <nb-select value="" formControlName="attributeValueId" fullWidth>
+                      <nb-option value="">Select Attibute Value</nb-option>
+                      <nb-option *ngFor="let item of attributeValueList"
+                        [value]="item.Id">{{item.ControlValue}}</nb-option>
+                    </nb-select>
+                    <button type="button" ghost nbButton status="danger" (click)="deleteAttribute(i)"><nb-icon
+                        icon="trash-outline"></nb-icon></button>
+
+                  </div>
+                </ng-container>
+              </ng-container>
+
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <nb-checkbox checked>Charge tax on this product</nb-checkbox>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Media
+        </nb-card-header>
+        <nb-card-body>
+
+
+          <div class="col-md-12">
+            <div class="uploadcontainer" appDnd>
+
+              <input type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target.files)" />
+              <img src="assets/img/dnd/ic-upload-file.svg" alt="">
+              <h3>Drag and drop file here</h3>
+              <h3>or</h3>
+              <label for="fileDropRef">Browse for file</label>
+            </div>
+
+
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Pricing
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+
+            <div class="col-sm-12">
+              <div class="form-inline">
+                <nb-select selected="" formControlName="countryIdSingle" fullWidth>
+                  <nb-option value="">Select Country</nb-option>
+                  <nb-option *ngFor="let item of countryList" [value]="item.id">{{item.name}}</nb-option>
+                </nb-select>
+                <input type="text" nbInput fullWidth placeholder="MRP" formControlName="mrpSingle">
+                <input type="text" nbInput fullWidth placeholder="SellPrice" formControlName="sellPriceSingle">
+                <button type="button" ghost nbButton status="primary" (click)="addPricing()"><nb-icon
+                    icon="plus-outline"></nb-icon></button>
+              </div>
+              <ng-container formArrayName="pricingForm">
+                <ng-container *ngFor="let pricing of pricingForm.controls; let i = index">
+
+                  <div class="form-inline" [formGroupName]="i">
+
+                    <nb-select formControlName="countryValue" fullWidth>
+                      <nb-option value="">Select Country</nb-option>
+                      <nb-option *ngFor="let item of countryList" [value]="item.id">{{item.name}}</nb-option>
+                    </nb-select>
+                    <input type="text" formControlName="mrpValue" nbInput fullWidth placeholder="MRP">
+                    <input type="text" formControlName="sellPriceValue" nbInput placeholder="SellPrice">
+                    <button type="button" ghost nbButton status="danger" (click)="deletePricing(i)"><nb-icon
+                        icon="trash-outline"></nb-icon></button>
+
+                  </div>
+                </ng-container>
+              </ng-container>
+
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <nb-checkbox checked>Charge tax on this product</nb-checkbox>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Inventory
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">SKU (Stock Keeping Unit)</label>
+                <input type="text" nbInput fullWidth formControlName="productCode">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLastName" class="label">EAN No</label>
+                <input type="text" nbInput fullWidth formControlName="gtin">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <nb-checkbox checked>Track quantity</nb-checkbox>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Stock Quantity</label>
+                <input type="text" nbInput fullWidth formControlName="stockQuantity">
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-header>
+          Dimension & Weight
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Weight</label>
+                <input type="text" nbInput fullWidth formControlName="weightInKg" placeholder="0.0 kg">
+              </div>
+            </div>
+
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Length</label>
+                <input type="text" nbInput fullWidth formControlName="lengthInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Width</label>
+                <input type="text" nbInput fullWidth formControlName="widthInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Height</label>
+                <input type="text" nbInput fullWidth formControlName="heightInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Carton Information
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-4 mt-3">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Carton Weight</label>
+                <input type="text" nbInput fullWidth formControlName="cartonWeightInKg" placeholder="0.0 kg">
+
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Carton Length</label>
+                <input type="text" nbInput fullWidth formControlName="cartonLengthInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Carton Width</label>
+                <input type="text" nbInput fullWidth formControlName="cartonWidthInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Carton Height</label>
+                <input type="text" nbInput fullWidth formControlName="cartonHeightInCm" placeholder="0.000 cm">
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-header>
+          Other Information
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">6-Digit HSN Code</label>
+                <input type="text" nbInput fullWidth formControlName="sixDigitHSNCode" placeholder="0.000 mm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">8-Digit HSN</label>
+                <input type="text" nbInput fullWidth formControlName="eightDigitHSNCode" placeholder="0.000 mm">
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Base Thickness</label>
+                <input type="text" nbInput fullWidth formControlName="baseThicknessInMM" placeholder="0.000 mm">
+
+              </div>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Case Pack</label>
+                <input type="text" nbInput fullWidth formControlName="casePack" placeholder="0.000 mm">
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+
+
+    </div>
+    <div class="col-md-4">
+      <nb-card>
+        <nb-card-header>
+          Product Status
+        </nb-card-header>
+        <nb-card-body>
+          <div class="form-group">
+            <nb-checkbox formControlName="published">Publish</nb-checkbox>
+
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Product Organization
+        </nb-card-header>
+        <nb-card-body>
+
+          <div class="form-group">
+            <label for="productName" class="label">Product Category</label>
+            <nb-select selected="0" fullWidth formControlName="productTypeId">
+              <nb-option value="0">Select Category</nb-option>
+              <nb-option *ngFor="let item of categoryList" [value]="item.id">{{item.categoryName}}</nb-option>
+            </nb-select>
+          </div>
+
+          <div class="form-group">
+            <label for="productName" class="label">Brand</label>
+            <nb-select selected="0" fullWidth formControlName="brandId">
+              <nb-option value="0">Select Brand</nb-option>
+              <nb-option *ngFor="let item of brandList" [value]="item.id">{{item.name}}</nb-option>
+            </nb-select>
+          </div>
+          <!-- <div class="form-group">
+        <label for="productName" class="label">Applied to country</label>
+        <nb-select  style="width:100%">
+          <nb-option *ngFor="let item of countryList" [value]="item.id">{{item.name}}</nb-option>
+        </nb-select>
+      </div> -->
+          <!-- <div class="form-group">
+        <label for="productName" class="label">Product Tags</label>
+        <input type="text" nbInput fullWidth id="productName" placeholder="Product Tags">
+      </div> -->
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Related Products
+        </nb-card-header>
+        <nb-card-body>
+
+          <div class="form-group">
+
+            <input type="text" nbInput fullWidth id="productName" placeholder="Type Product Name">
+          </div>
+          <div>
+            <nb-list>
+              <nb-list-item *ngFor="let user of users">
+                <nb-user [name]="user.name" [title]="user.title">
+                </nb-user>
+              </nb-list-item>
+            </nb-list>
+          </div>
+
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+  </div>
+</form>

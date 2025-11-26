@@ -1,0 +1,23 @@
+<nb-card>
+    <nb-card-header>
+        Quote List
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="cussettings" [source]="cussource"
+            (custom)="onCustomAction({ action: 'onCustomShow', template: dialog })">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<ng-template #dialog let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header class="head">Template Dialog
+            <button type="button" class="close fa fa-times" aria-label="Close" (click)="ref.close()"></button>
+        </nb-card-header>
+        <nb-card-body>
+            <ng2-smart-table [settings]="details" [source]="dataSource"
+                (custom)="onCustomAction({ action: 'onCustomShow' })">
+            </ng2-smart-table>
+        </nb-card-body>
+    </nb-card>
+</ng-template>

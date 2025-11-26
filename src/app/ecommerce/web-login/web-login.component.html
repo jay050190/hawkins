@@ -1,0 +1,39 @@
+<div class="searcbar" id="searchbar">
+    <div class="">
+        <input type="text" placeholder="Search" class="form-control text-search">
+    </div>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+<div class="write-review mobile-veiw2 pt-5 pb-5">
+    <div class="row">
+        <div class="col-12 col-md-6 mx-auto pt-3 ps-3 pe-3 pb-5 border bg-grey1">
+            <div class="text-center pt-3 pb-3">
+                <h2>LOGIN</h2>
+            </div>
+            <div class="write-review-card border-0 pb-0">
+                <div class="mb-3">
+                    <input type="text" formControlName="Email" class="form-control"  placeholder="Email Id">
+                    <span *ngIf="submitted && f.Email.errors?.required" style="display: block;" class="invalid-feedback">Email is required</span>
+                    <span *ngIf="submitted && f.Email.errors?.pattern" style="display: block;"
+                    class="invalid-feedback">Invalid Email ID</span>
+                </div>
+                <div class="mb-3">
+                    <input type="password" formControlName="Password" class="form-control" placeholder="Password">
+                    <span *ngIf="submitted && f.Password.errors?.required" style="display: block;" class="invalid-feedback">Password is required</span>
+                </div>
+                <div>
+                    <span class="form-validation">Not a member ? <a [routerLink]="['/user-register']">Create Account</a></span>
+                </div>
+                <div class="text-end pb-2 pt-2">
+                    <button type="submit" class="btn-load-more">Login</button>
+                </div>
+                <div *ngIf="message.length>0" class="alert" [ngClass]="msgClass" role="alert">
+                    {{message}}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div> 
+</form>

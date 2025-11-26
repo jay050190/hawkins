@@ -1,0 +1,96 @@
+<div class="searcbar" id="searchbar">
+    <div class="">
+        <input type="text" placeholder="Search" class="form-control text-search">
+    </div>
+</div>
+<div class="pt-5 cart-checkout-page2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="Header">
+                    <h3 class="Heading">Shopping Cart</h3>
+                    <button class="btn-danger text-white p-1 ps-3 pe-3 btn-sm" (click)="emptyCart()">Remove all</button>
+                </div>
+            </div>
+            <div class="col-md-8 col-12">
+                <div class="row CartContainer" *ngIf="cartItem.length">
+                   <ng-container *ngFor="let item of cartItem;let i = index">
+                   <div class="col-md-12 col-12">
+                    <div class="row Cart-Items">
+                        <div class="col-md-3 image-box">
+                            <img [src]="item.img"  class="img-fluid" />
+                            <!-- <div class="counter">
+                              <div class="btn" (click)="updateQuantity(i,'add',item)">+</div>
+                              <div class="count">{{item.Quantity}}</div>
+                              <div class="btn" (click)="updateQuantity(i,'remove',item)">-</div>
+                          </div> -->
+                          
+                        </div>
+                        <div class="col-md-9 about mt-3">
+                            <div>
+                                <h1 class="title">{{item.ProductName}}</h1>
+                                <h3 class="subtitle">₹ {{item.SalePrice}}</h3>
+                            </div>
+                            <div class="cart-info quantity mt-4">
+                                <div class="btn-increment-decrement" (click)="updateQuantity(i,'remove',item)">-</div>
+                                <input class="input-quantity" [value]="item.Quantity">
+                                <div class="btn-increment-decrement" (click)="updateQuantity(i,'add',item)">+</div>
+                            </div>
+                            <!-- <img src="images/veg.png" style="height:30px"/> -->
+                        </div>
+                        
+                        <!-- <div class="prices">
+                            <div class="amount">₹ {{item.Total}}</div>
+                            <div class="save"><u>Save for later</u></div>
+                            <div class="remove" (click)="removeProduct(i,item)"><u>Remove</u></div>
+                        </div> -->
+                  </div>
+                   </div>
+                </ng-container>
+                
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                    <div class="CartContainer mt-1 p-4" *ngIf="cartItem.length">
+                    <div class="order-total">
+                    <div class="value">No of items:</div>
+                    <div class="value mt-3">{{totalItem}} </div>
+                    </div>
+                    <div class="order-total border-top pt-2 mt-2">
+                        <div class="label">Order Total:</div>
+                        <div class="label">₹ {{totalAmt}} </div>
+                     </div>
+                    <div class="col-md-12 mt-3 ps-3 pe-3">
+                        <button class="button" (click)="goToRoute('./checkout')">Checkout</button>
+                    </div>
+                    </div>
+               </div>
+                <div class="cart-checkout-page2" *ngIf="!cartItem.length">
+                    <div class="row">
+                       <div class="col-md-6 mx-auto col-12">
+                         <div class="card border rounded">
+                           <div class="card-header">
+                           <h5>Cart</h5>
+                           </div>
+                           <div class="card-body cart">
+                                <div class="col-sm-12 empty-cart-cls text-center">
+                                    <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                                    <h3><strong>Your Cart is Empty</strong></h3>
+                                    <h4>Add something to make me happy :)</h4>
+                                </div>
+                                <div class="col-md-6 col-12 mx-auto">
+                                    <button class="button" (click)="goToRoute('./product-list')">Continue shopping</button>
+                                </div>
+                           </div>
+                       </div>
+                           
+                       
+                       </div>
+                    
+                    </div>
+                   
+                </div>
+            
+        </div>
+    </div>
+</div>

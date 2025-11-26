@@ -1,0 +1,178 @@
+<ngx-search-text></ngx-search-text>
+
+<div class="content pt-5 pb-3">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-12">
+                <h1 class="main-title mb-4">REGISTER YOUR PRODUCT</h1>
+                <p class="clear">Hawkins products are guaranteed against defects in material and workmanship as per the terms of the
+                    written guarantee supplied with each product. All our Pressure Cookers and our Futura Hard Anodised
+                    cookware are guaranteed for a period of five years from the date of first purchase by the user; our
+                    Futura Nonstick cookware comes with a two year guarantee. You may choose to register your product
+                    here or as directed in the guarantee card supplied along with the product.</p>
+                <p>Use of this section is governed by our <a href="#">Terms Of Use</a> and <a href="#">Privacy
+                        Policy</a>.</p>
+                <p>Please note that this facility presently is only for customers in India.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex align-items-center">
+            <div class="col-md-12 text-center">
+                <p>Please fill in all fields, except those marked optional, which you may choose to fill in if you wish
+                    to</p>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <ng-container *ngIf="steps.one">
+                    <form [formGroup]="prdRegisterForm" (ngSubmit)="onCheckQuarantee()">
+                    <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType9">Enter Guarantee Card No. *</span>
+                        </div>
+                        <div>
+                            <input  formControlName="guranteeCard"  type="text" maxlength="20" class="form-control">
+                            <span *ngIf="submitted && f.guranteeCard.errors?.required" style="display: block;" class="invalid-feedback">Guarantee Card No. is required</span>
+                        </div>
+                    </div>
+
+
+                   <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType8">Date of Purchase *</span>
+                        </div>
+                        <div>
+                            <input class="form-control" [maxDate]="maxDate" placeholder="yyyy-mm-dd" name="dp" (click)="d.toggle()" formControlName="dop" ngbDatepicker #d="ngbDatepicker"/>
+                            <!-- <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button> -->
+                            <!-- <input formControlName="dop" type="text" id="txt_date" autocomplete="off"class="form-control"> -->
+                            <span *ngIf="submitted && f.dop.errors?.required" style="display: block;" class="invalid-feedback">Date of purchase is required</span>
+                        </div>
+                   </div>
+
+
+                  <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType19">Upload Bill (Optional)</span>
+                        </div>
+                        <div>
+                            <input type="file" name="FileUpload1" id="FileUpload1" allowmultiple="false">
+                        </div>                 
+                  </div>                
+                  <div class="col-md-12 col-12 mb-3">
+                    <input type="submit" name="btn_gcard_prcd" value="CHECK YOUR PRODUCT" id="btn_gcard_prcd"
+                        class="border-0 float-start btn-slide text-center text-black width-auto ps-3 pt-2 width-auto pe-3 pt-2">
+                  </div>
+                    </form>
+                    </ng-container>
+                <ng-container *ngIf="steps.two">
+                    <form [formGroup]="otpForm" (ngSubmit)="getOtp()">
+                   <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType0">First Name</span>
+                        </div>
+                        <div>
+                            <input formControlName="firstname" type="text" maxlength="48" class="form-control">
+                            <span *ngIf="submitted && t.firstname.errors?.required" style="display: block;" class="invalid-feedback">First Name is required</span>
+                        </div>
+                   </div>
+
+                   <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="Label1">Last Name</span>
+                        </div>
+                        <div>
+                            <input formControlName="lastname" type="text" maxlength="48" 
+                            class="form-control">
+                            <span *ngIf="submitted && t.lastname.errors?.required" style="display: block;" class="invalid-feedback">Last Name is required</span>
+                        </div>
+                   </div>
+                    <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType17">Email</span>
+                        </div>
+                        <div>
+                            <input formControlName="email" type="text" maxlength="90" class="form-control">
+                            <span *ngIf="submitted && t.email.errors?.required" style="display: block;" class="invalid-feedback">Email is required</span>
+                        </div>
+                    </div>
+                   <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <span id="lblProdType13">Pin Code</span>
+                        </div>
+                        <div>
+                            <input formControlName="pincode" type="text" maxlength="6" 
+                            class="form-control">
+                        </div>
+                   </div> 
+                   <div class="col-md-4 col-12 mb-3">
+                    <div>
+                        <span id="lblProdType16">Mobile No.</span>
+                    </div>
+                    <div>
+                        <input formControlName="mobile" type="text" maxlength="10" 
+                        class="form-control">
+                        <span *ngIf="submitted && t.lastname.errors?.required" style="display: block;" class="invalid-feedback">Mobile no is required</span>
+                    </div>
+                 </div>           
+                   <div class="col-md-4 col-12 mb-3">
+                        <div>
+                            <input type="submit"  value="Get OTP" 
+                                class="border-0 float-start btn-slide text-center text-black width-auto ps-3 pt-2 width-auto pe-3 pt-2">
+                            <input type="hidden" name="hddn_otp" id="hddn_otp">
+                            
+                        </div>    
+                   </div>
+                </form>
+                </ng-container>
+                    
+                <ng-container *ngIf="steps.three">
+                    <form [formGroup]="finalForm" (ngSubmit)="onVerify()">
+                    <div class="col-md-12 col-12 mb-3">
+                        <div class="row">
+                            <div class="col-md-2 col-12 mb-2">
+                                <span id="lblEnterOTP">Enter OTP</span>
+                            </div>
+                                <div class="col-md-4 col-12 mb-2">
+                                   
+                                    
+                                    <input formControlName="otpEntered" type="number" minlength="6" maxlength="6"
+                                    class="form-control">
+                                    <span *ngIf="submitted && fin.otpEntered.errors?.required" style="display: block;" class="invalid-feedback">Please enter the OTP</span>
+                                
+                                    <span *ngIf="submitted && fin.otpEntered.errors?.minlength" style="display: block;" class="invalid-feedback">There is a problem with the OTP length</span>
+                                </div>
+                            
+                        
+                            <div class="col-md-4 mb-2">
+                                <input type="submit"  value="VERIFY" class="border-0 float-start btn-slide text-center text-black width-auto ps-3 pt-2 width-auto pe-3 pt-2">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="small" id="lbl_OTPSentMsg" style="color:Green;font-weight:bold;">(OTP is sent to your mobile
+                                    number)</div>
+                            </div>
+                    </div>
+                    </div>
+                   
+                  <div *ngIf="showConfirm" class="col-md-12 col-12 mb-3">
+                    <div class="ps-4">
+                        <input id="chk_offer" type="checkbox" class="form-check-input" name="chk_offer">
+                        &nbsp;
+                        <label for="chk_offer">I would like to be kept informed through email or sms about your products, services or special offers</label>
+                    </div>
+                </div>
+                    <div *ngIf="showConfirm" class="col-md-12 col-12 mb-3">
+                        <div id="lbl23">Please confirm registration by clicking the ‘Confirm’ button.</div>
+                    </div>
+                    <br>
+
+                    <div *ngIf="showConfirm" class="col-md-12 col-12 mb-3">
+                        <input type="button" [disabled]="otpText != fin.otpEntered.value" value="CONFIRM" (click)="onSubmit()" class="border-0 float-start btn-slide text-center text-black width-auto ps-3 pt-2 width-auto pe-3 pt-2">
+                    </div>
+                    </form>
+                </ng-container>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

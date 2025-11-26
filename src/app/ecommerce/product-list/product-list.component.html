@@ -1,0 +1,152 @@
+
+<ngx-search-text></ngx-search-text>
+<div class="slide-panel1 border-top pt-3 pb-4 desktop-hide" hidden>
+	<div class="text-right mr-2">
+		<a [routerLink]="" (click)="showFilterWindow()" style="text-decoration: none;cursor: pointer;">
+			<img src="../../../assets/images/ecommerce/filter.png" class="img-fluid">
+		</a>
+		<!-- <a href="#" class="btn-filter">
+			<span>By Size</span>
+			<span class="badge2"><img src="../../../assets/images/ecommerce/close-i.png" class="img-fluid"></span>
+		</a>
+		<a href="#" class="btn-filter2">
+			<span>By Shape</span>
+			<span class="badge2"><img src="../../../assets/images/ecommerce/close-i.png" class="img-fluid"></span>
+		</a>
+		<a href="#" class="btn-filter2">
+			<span>By Heat Source</span>
+			<span class="badge2"><img src="../../../assets/images/ecommerce/close-i.png" class="img-fluid"></span>
+		</a> -->
+	</div>
+</div>
+<!-- <div class="mb-5 slider" style="margin: 0px !important;">
+    <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of slidesStore">
+          <ng-template carouselSlide [id]="slide.id">
+            <img style="border-radius:0px !important;" [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+          </ng-template>
+        </ng-container>
+    
+      </owl-carousel-o>
+</div> -->
+
+<div class="product-card">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3 col-12">
+				<ngx-filter-product (filterClosedEvent)="updateShowFilterWindow($event)" (onSearchEvent)="searchByFilter($event)" [selectedFilterOption]="filterOption" [panelVisible] = "filterHidden"></ngx-filter-product>
+			</div>
+			<div class="col-md-9 col-12 mobile-view1">
+				  <div class="row pt-3 pb-3">
+					<!-- ps-1 -->
+						<div class="text-filter-title" style="color:#dc3545!important">
+							PRODUCTS
+						</div>
+					</div>
+					<div class="flex-sec border-top">
+					<div class="flex-items2">
+					<ng-container *ngFor="let item of searchArr;let i = index">
+						<button class="btn btn-filter1 mr-2"><span class="txt-btn">{{item.name}}</span><a (click)="removeFilter(item)" class="sup"><img src="../../../assets/images/ecommerce/close-icon1.png" class="x-icon"></a></button>
+					</ng-container>
+						<!-- <a  [routerLink]="" (click)="searchproduct()" style="text-decoration:none;cursor: pointer;width: auto;" class="btn-slide mr-2">Done</a> -->
+					</div>
+					</div>
+					<ng-container > <!--*ngIf="totalProductCount>0"-->
+						<div class="row desktop-hide bg-white rounded">
+							<div class="col-12 pt-2 pb-2">
+								<a [routerLink]="['/home']" (click)="showFilterWindow()" class="btn-link1 bg-transparent">ALL FILTER</a>
+								<a [routerLink]="" (click)="showFilterWindow()"  class="btn-link1 bg-transparent"><span class="float-end"><img src="../assets/images/ecommerce/filter.png" class="icon3 img-fluid"></span></a>
+							</div>
+						</div>
+						<div class="row">
+								<div class="col-8 p-2 pt-3 pb-3">
+									<!-- "  -->
+									<select #sort (change)="SortFilterApplied(sort.value)" class="form-control select-control border-0" style="background-size: 3%;">
+										<option value="LHP">Low to High Price</option>
+										<option value="HLP">High to Low Price</option>
+										<option value="NOP">New to Old products</option>
+										<option value="ONP">Old to New products</option>
+									</select>
+								</div>
+								<div class="col-4 p-2 pt-4 pb-3">
+									<div class="latest-products">{{totalProductCount}} Products</div>
+								</div>
+						</div>
+						<div class="row">
+							<ng-container *ngFor="let item of itemData;let i = index"> 
+							<div class="col-6 col-md-3 p-2" [ngClass]="(i+1)%2?'ps-1':'ps-1'">
+								<div class="bg-white position-rel">
+									<div class="new-item" *ngIf="item.isnew>0">
+										<div class="bdg-body" >
+											<span class="bdg-text">New</span>
+										</div>
+										<div class="bdg-clr-tri"></div>
+									</div>
+									<div class="pt-3 text-center">
+										<a [routerLink]="['/product-detail']" [queryParams]="{ product: item.Id}"><img [src]="item.img" class="img-fluid"></a>
+									</div>
+									<!-- <div class="absolute1">
+										<a href="javascript:;" class="text-danger btn-11">
+											<input type="checkbox" style="opacity: 0;position: relative;left: 26px;top: 0px;width: 22px;height: 22px;">
+											<i class="fa fa-heart fa-2x" aria-hidden="true" style="font-size: 1.2em !important;"></i>
+										</a>
+									</div> -->
+									<div class="p-3 height-product pb-4 bg-grey1">
+										<div style="cursor: pointer;" [routerLink]="['/product-detail']" [queryParams]="{ product: item.Id}" class="p-text1">
+											<!-- {{item.brand}} <br> -->
+											{{item.ProductName}}
+										</div>
+										<div class="row mt-2">
+											
+											<div class="col-md-6 col-6 text-danger ps-0 pe-0">
+												<span *ngIf="item.MRP>item.SalePrice" class="saleprice">₹ {{item.MRP}}</span>
+											</div>
+											<div class="col-md-6 col-6 text-danger pe-0">
+												<strong>₹ {{item.SalePrice}}</strong>
+											</div>
+
+											<div class="col-md-12 col-12 text-center"><a [routerLink]="" (click)="addProductToQuote(item)" class="text-black text-decoration-none p-text1" style="border-bottom: 1px solid;">Get Quote</a></div>
+											
+										</div>
+										
+										<!-- <div class="mt-1 small">
+											{{item.shortDescription}}
+										</div> -->
+										
+										<div class="mt-2 small">
+											<div class="row">
+												<div class="col-md-12 col-12 pe-0 ps-0 mt-1">
+													<a [routerLink]="" (click)="addProduct(item.Id)" class="btn-cart1 percenterfloat"><img src="../../../assets/images/ecommerce/cart-list-icon1.png" class="img-fluid iconcart-1"> Add to Cart</a>
+												</div>
+												
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							</ng-container>
+							<p *ngIf="loadedItemCount < totalProductCount" class="text-center mt-4"><a href="javascript:;" (click)="loadProductData()" class="btn-slide-banner text-white" style="text-decoration: none; cursor: pointer; background-color: #EAEAEA; color: #000 !important; font-weight: 600;">Load More</a></p>
+						</div>
+					</ng-container>
+					<ng-container *ngIf="totalProductCount<1"> 
+						<ngx-no-product></ngx-no-product>
+					</ng-container>
+			</div>
+		</div>
+	
+	</div>
+	<!-- <div class="row">
+		<div class="col-12 pt-4 pb-3">
+			<p class="text-center"><a onclick="myFunction1()" id="myBtn1" class="btn-link5 border">Load more</a></p>
+		</div>
+	</div> -->
+
+</div>
+<ngx-spinner></ngx-spinner>
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<nb-card fullWidth>
+    <nb-card-header>{{ title }}</nb-card-header>
+    <nb-card-body>
+     <div class="row" style="width: 1200px;height: 600px;">
+        <div class="col-8">
+            <nb-tabset>
+                <nb-tab tabTitle="Uploaded Files">
+                    <div class="col-md-12">
+                        <div class="uploadcontainer" appDnd >
+                            <!-- (change)="fileBrowseHandler($event.target.files)" -->
+                            <input type="file" #fileDropRef id="fileDropRef" (change)="readURL($event);" />
+                            <img src="assets/img/dnd/ic-upload-file.svg" alt="">
+                            <h3>Drag and drop file here</h3>
+                            <h3>or</h3>
+                            <label for="fileDropRef">Browse for file</label>
+                        </div>
+                    </div>
+                </nb-tab>
+                <nb-tab tabTitle="Media Gallery">
+                    <div class="col-12" (scroll)="scrollHandler($event)"  style="overflow: scroll;">
+                    <ul>
+                        <ng-container *ngFor="let item of mediaGalleryList;let i = index">
+                            <li>
+                            <input type="checkbox" id="chk_{{i}}" />
+                            <label for="chk_{{i}}"><img [src]="item.ThumbnailDoc" /></label>
+                            </li>
+                        </ng-container>
+                      </ul>
+                    </div>
+                </nb-tab>
+              </nb-tabset>
+        </div>
+        <div class="col-4">
+        <div class="row">
+          
+          <nb-card>
+            <nb-card-header>Add new category</nb-card-header>
+            <nb-card-body>
+          <form [formGroup]="imageForm" (ngSubmit)="onSave()">
+            <div class="row">
+            <div class="col-12">
+                <img width="200px" [src]="imageSrc">  
+            </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="alt" class="label">Alt</label>
+                  <input type="text" nbInput fullWidth formControlName="alt">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="title" class="label">Title</label>
+                  <input type="text" nbInput fullWidth formControlName="title">        
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" nbButton status="success">{{buttontext}}</button>
+                <button type="button" class="ml-2" nbButton status="primary" (click)="onClear()">Clear</button>
+              </div>
+            </div>
+          </form>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        </div>
+     </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <!-- <button nbButton hero status="primary" (click)="dismiss()">Dismiss Dialog</button> -->
+    </nb-card-footer>
+  </nb-card>
+  

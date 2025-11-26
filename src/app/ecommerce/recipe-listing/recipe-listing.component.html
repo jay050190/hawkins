@@ -1,0 +1,40 @@
+
+<div class="content pt-5 pb-3">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-12">
+                <h1 class="main-title mb-2">VEGETARIAN RECIPE</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <ng-container *ngFor="let item of recipieList;let i = index"> 
+                <div class="col-lg-3 col-md-3 col-sm-3 col-6 mt-3 mb-3">
+                    <div class="">
+                        <div class="">
+                            <div class="p-0">
+                                <a [routerLink]="['/recipe-details']">
+                                <img [src]="item.src" class="img-fluid">
+                            </a>
+                            </div>
+                            <a [routerLink]="['/recipe-details']" style="text-decoration: none;color: inherit;">
+                                <div class="main-recipe-title1 pt-2">{{item.title}}</div>
+                                <div class="main-recipe-discription1">{{item.subtitle}}</div>
+                            </a>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-md-6 col-12 pt-3 ps-0">
+                                <span class="recipe-list1"><img src="assets/images/recipe/serve-people.png" class="recpe-icon-2"> {{item.serving}}</span>
+                            </div>
+                            <div class="col-md-6 col-12 pt-3 ps-0">
+                                <span class="recipe-list1"><img src="assets/images/recipe/clock.png" class="recpe-icon-2"> {{item.time}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+
